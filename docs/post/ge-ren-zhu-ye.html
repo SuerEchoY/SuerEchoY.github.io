@@ -10,11 +10,9 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="##  你好
-123。">
+<meta name="description" content="本页面主要归档我本科及研究生期间的核心学术资料与工程项目，涵盖从底层硬件驱动到上层机器人算法的全栈开发。">
 <meta property="og:title" content="个人主页">
-<meta property="og:description" content="##  你好
-123。">
+<meta property="og:description" content="本页面主要归档我本科及研究生期间的核心学术资料与工程项目，涵盖从底层硬件驱动到上层机器人算法的全栈开发。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://SuerEchoY.github.io/post/ge-ren-zhu-ye.html">
 <meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
@@ -75,8 +73,35 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h2>你好</h2>
-<p>123</p></div>
+<div class="markdown-body" id="postBody"><p>本页面主要归档我本科及研究生期间的核心学术资料与工程项目，涵盖从底层硬件驱动到上层机器人算法的全栈开发。</p>
+<h2>🤖 机器人系统与算法 (Robotics)</h2>
+<h3>1. 全栈导航系统框架 (ROS/ROS2)</h3>
+<p>独立架构并开发的机器人导航系统，覆盖从感知到运动控制的完整闭环。</p>
+<ul>
+<li><strong>建图与定位：</strong> 融合激光雷达与里程计数据的 SLAM 实现。</li>
+<li><strong>路径规划：</strong> 实现了全局规划器（Global Planner）与局部避障算法（Local Planner）。</li>
+<li><strong>技术栈：</strong> <code class="notranslate">C++</code>, <code class="notranslate">ROS/ROS2</code>, <code class="notranslate">CMake</code></li>
+</ul>
+<h3>2. Unitree Go2 四足机器人二次开发</h3>
+<p>基于 Unitree SDK 进行上层运动控制开发与算法验证。</p>
+<ul>
+<li><strong>轨迹追踪：</strong> 解析给定轨迹数据，通过 SDK 下发底层控制指令，实现高精度轨迹跟随。</li>
+<li><strong>Sim2Real 验证：</strong> 结合 NVIDIA Isaac Lab 进行强化学习算法的仿真与真机部署测试。</li>
+</ul>
+<h2>⚙️ 嵌入式与底层驱动 (Embedded &amp; Linux)</h2>
+<h3>1. 嵌入式 Linux 驱动开发</h3>
+<ul>
+<li>基于 ARM 架构的底层驱动编写与内核裁剪。</li>
+<li>熟悉设备树配置及 I2C/SPI 等常用总线协议，确保传感器数据的高效采集与上下位机通信。</li>
+<li><strong>技术栈：</strong> <code class="notranslate">STM32</code>, <code class="notranslate">Linux Kernel</code>, <code class="notranslate">C</code></li>
+</ul>
+<h2>🎛️ 硬件加速 (FPGA)</h2>
+<h3>1. 高速接口与图像处理流水线</h3>
+<p>利用 FPGA 的并行计算优势，实现实时机器视觉预处理。</p>
+<ul>
+<li><strong>图像流处理：</strong> 实现了基于 Verilog 的图像滤波、边缘检测及色彩空间转换流水线。</li>
+<li><strong>高速传输：</strong> 负责高速接口的时序收敛与数据缓存设计。</li>
+</ul></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
