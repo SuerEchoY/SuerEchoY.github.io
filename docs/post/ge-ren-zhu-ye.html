@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<html data-color-mode="light" data-dark-theme="dark_dimmed" data-light-theme="light" lang="zh-CN">
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -15,10 +15,10 @@
 <meta property="og:description" content="本页面主要归档我本科及研究生期间的核心学术资料与工程项目，涵盖从底层硬件驱动到上层机器人算法的全栈开发。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://SuerEchoY.github.io/post/ge-ren-zhu-ye.html">
-<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/155501442?v=4&size=64">
 <title>个人主页</title>
 
-
+<script>document.addEventListener('DOMContentLoaded', function() { if(window.location.pathname === '/' || window.location.pathname === '/index.html') { var intro = document.createElement('div'); intro.innerHTML = '<div class="intro-card"><h3>👋 Hi, I am SuerEchoY</h3><p>🤖 <b>核心领域：</b>FPGA 硬件加速与图像处理 | 嵌入式 Linux 驱动 | ROS/ROS2 机器人导航系统</p><p>🛠️ <b>技术栈：</b>C++ / Verilog / STM32 / PCL / Isaac Lab 仿真与强化学习</p><p>🚀 <b>近期 Focus：</b>基于 Go2 的运控二次开发与多传感器融合 SLAM 框架。</p><div class="intro-links"><a href="/about.html">👤 详细简历 (About)</a><a href="/portfolio.html">📁 项目归档 (Portfolio)</a></div></div>'; var header = document.querySelector('.header'); if(header) header.insertAdjacentElement('afterend', intro); } });</script>
 
 </head>
 <style>
@@ -43,7 +43,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 }
 
 </style>
-
+<style>.intro-card { background: linear-gradient(135deg, rgba(0,107,117,0.1) 0%, rgba(38,166,65,0.1) 100%); border: 1px solid #26a641; border-radius: 12px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); backdrop-filter: blur(5px); } .intro-card h3 { margin-top: 0; color: #26a641; font-size: 1.5em; } .intro-card p { margin-bottom: 10px; color: var(--color-fg-default); line-height: 1.6; } .intro-links { margin-top: 20px; } .intro-links a { display: inline-block; margin-right: 15px; padding: 8px 18px; background: #26a641; color: #fff !important; border-radius: 6px; text-decoration: none; font-weight: bold; transition: all 0.3s ease; } .intro-links a:hover { background: #1e8733; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(38,166,65,0.4); } .SideNav-item { background: var(--color-canvas-subtle); border: 1px solid var(--color-border-default); border-radius: 10px !important; margin-bottom: 15px; padding: 16px; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); } .SideNav-item:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(38,166,65,0.15); border-color: #26a641; border-left: 6px solid #26a641; } .avatar { border-radius: 50%; box-shadow: 0 0 20px rgba(38,166,65,0.5); border: 2px solid #26a641; transition: transform 0.5s ease; } .avatar:hover { transform: rotate(360deg); }</style>
 
 
 
@@ -102,13 +102,13 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li><strong>图像流处理：</strong> 实现了基于 Verilog 的图像滤波、边缘检测及色彩空间转换流水线。</li>
 <li><strong>高速传输：</strong> 负责高速接口的时序收敛与数据缓存设计。</li>
 </ul></div>
-<div style="font-size:small;margin-top:8px;float:right;"></div>
+<div style="font-size:small;margin-top:8px;float:right;">Powered by Gmeek | Code is Law, Hardware is the World.</div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
 <div class="comments" id="comments"></div>
 
 </div>
-    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://SuerEchoY.github.io">Blog Title</a></div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://SuerEchoY.github.io">SuerEchoY's Matrix</a></div>
 <div id="footer2">
     <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
 </div>
@@ -117,8 +117,8 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 var now=new Date();
 document.getElementById("copyrightYear").innerHTML=now.getFullYear();
 
-if(""!=""){
-    var startSite=new Date("");
+if("04/04/2026"!=""){
+    var startSite=new Date("04/04/2026");
     var diff=now.getTime()-startSite.getTime();
     var diffDay=Math.floor(diff/(1000*60*60*24));
     document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
