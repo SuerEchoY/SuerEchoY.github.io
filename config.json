@@ -1,19 +1,19 @@
 {
-    "title": "RoboGeek Matrix",
-    "subTitle": "硬件加速 · 嵌入式驱动 · 机器人算法与控制",
-    "avatarUrl": "https://github.githubassets.com/favicons/favicon.svg",
+    "title": "SuerEchoY's Matrix",
+    "subTitle": "从芯片硅片到具身智能的全栈探索",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/155501442?v=4&size=64",
     "GMEEK_VERSION": "last",
     "displayTitle": "SuerEchoY",
-    "homeUrl": "https://你的GitHub用户名.github.io",
+    "homeUrl": "https://SuerEchoY.github.io",
     "faviconUrl": "https://github.githubassets.com/favicons/favicon.svg",
-    "email": "2254739585@qq.com",
+    "email": "你的邮箱@example.com",
     "startSite": "04/04/2026",
     "filingNum": "",
     "onePageListNum": 15,
+    "singlePage": ["about", "portfolio"],
     "iconList": {},
     "exlink": {
-        "GitHub": "https://github.com/SuerYEcho.github.io",
-        "Bilibili": "https://space.bilibili.com/你的UID"
+        "GitHub": "https://github.com/SuerEchoY"
     },
     "commentLabelColor": "#006b75",
     "yearColorList": ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
@@ -22,7 +22,7 @@
     "dayTheme": "light",
     "nightTheme": "dark_dimmed",
     "urlMode": "pinyin",
-    "style": "<style>.avatar { border-radius: 50%; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 0 15px rgba(38,166,65,0.4); } .avatar:hover { transform: rotate(360deg) scale(1.15); } .SideNav-item { transition: all 0.3s ease; border-radius: 6px !important; margin-bottom: 8px; border-left: 3px solid transparent; } .SideNav-item:hover { transform: translateX(5px); background-color: rgba(38,166,65, 0.05); border-left: 3px solid #26a641; } .markdown-body h1, .markdown-body h2 { border-bottom: 2px solid #26a641; padding-bottom: 0.3em; margin-top: 1.5em; } .markdown-body code { background-color: rgba(110,118,129,0.2); color: #7ee787; font-family: 'Fira Code', monospace; }</style>",
-    "head": "",
-    "bottomText": "Powered by Gmeek | Architecting Intelligence from Silicon to Actuators"
+    "style": "<style>.intro-card { background: linear-gradient(135deg, rgba(0,107,117,0.1) 0%, rgba(38,166,65,0.1) 100%); border: 1px solid #26a641; border-radius: 12px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); backdrop-filter: blur(5px); } .intro-card h3 { margin-top: 0; color: #26a641; font-size: 1.5em; } .intro-card p { margin-bottom: 10px; color: var(--color-fg-default); line-height: 1.6; } .intro-links { margin-top: 20px; } .intro-links a { display: inline-block; margin-right: 15px; padding: 8px 18px; background: #26a641; color: #fff !important; border-radius: 6px; text-decoration: none; font-weight: bold; transition: all 0.3s ease; } .intro-links a:hover { background: #1e8733; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(38,166,65,0.4); } .SideNav-item { background: var(--color-canvas-subtle); border: 1px solid var(--color-border-default); border-radius: 10px !important; margin-bottom: 15px; padding: 16px; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); } .SideNav-item:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(38,166,65,0.15); border-color: #26a641; border-left: 6px solid #26a641; } .avatar { border-radius: 50%; box-shadow: 0 0 20px rgba(38,166,65,0.5); border: 2px solid #26a641; transition: transform 0.5s ease; } .avatar:hover { transform: rotate(360deg); }</style>",
+    "head": "<script>document.addEventListener('DOMContentLoaded', function() { if(window.location.pathname === '/' || window.location.pathname === '/index.html') { var intro = document.createElement('div'); intro.innerHTML = '<div class=\"intro-card\"><h3>👋 Hi, I am SuerEchoY</h3><p>🤖 <b>核心领域：</b>FPGA 硬件加速与图像处理 | 嵌入式 Linux 驱动 | ROS/ROS2 机器人导航系统</p><p>🛠️ <b>技术栈：</b>C++ / Verilog / STM32 / PCL / Isaac Lab 仿真与强化学习</p><p>🚀 <b>近期 Focus：</b>基于 Go2 的运控二次开发与多传感器融合 SLAM 框架。</p><div class=\"intro-links\"><a href=\"/about.html\">👤 详细简历 (About)</a><a href=\"/portfolio.html\">📁 项目归档 (Portfolio)</a></div></div>'; var header = document.querySelector('.header'); if(header) header.insertAdjacentElement('afterend', intro); } });</script>",
+    "bottomText": "Powered by Gmeek | Code is Law, Hardware is the World."
 }
