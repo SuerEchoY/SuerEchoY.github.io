@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-color-mode="light" data-dark-theme="dark_dimmed" data-light-theme="light" lang="zh-CN">
+<html data-color-mode="light" data-dark-theme="dark_dimmed" data-light-theme="dark_dimmed" lang="zh-CN">
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -15,10 +15,10 @@
 <meta property="og:description" content="本页面主要归档我本科及研究生期间的核心学术资料与工程项目，涵盖从底层硬件驱动到上层机器人算法的全栈开发。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://SuerEchoY.github.io/post/ge-ren-zhu-ye.html">
-<meta property="og:image" content="https://avatars.githubusercontent.com/u/155501442?v=4&size=64">
+<meta property="og:image" content="https://github.com/SuerEchoY.png">
 <title>个人主页</title>
 
-<script>document.addEventListener('DOMContentLoaded', function() { if(window.location.pathname === '/' || window.location.pathname === '/index.html') { var intro = document.createElement('div'); intro.innerHTML = '<div class="intro-card"><h3>👋 Hi, I am SuerEchoY</h3><p>🤖 <b>核心领域：</b>FPGA 硬件加速与图像处理 | 嵌入式 Linux 驱动 | ROS/ROS2 机器人导航系统</p><p>🛠️ <b>技术栈：</b>C++ / Verilog / STM32 / PCL / Isaac Lab 仿真与强化学习</p><p>🚀 <b>近期 Focus：</b>基于 Go2 的运控二次开发与多传感器融合 SLAM 框架。</p><div class="intro-links"><a href="/about.html">👤 详细简历 (About)</a><a href="/portfolio.html">📁 项目归档 (Portfolio)</a></div></div>'; var header = document.querySelector('.header'); if(header) header.insertAdjacentElement('afterend', intro); } });</script>
+<script>function scrollToBlog() { window.scrollTo({top: window.innerHeight, behavior: 'smooth'}); } document.addEventListener('DOMContentLoaded', function() { if(window.location.pathname === '/' || window.location.pathname === '/index.html') { document.body.classList.add('home-page'); var hero = document.createElement('div'); hero.id = 'custom-hero'; hero.innerHTML = '<div class="hero-nav"><div style="color:#fff; font-weight:bold; font-size:1.3rem; font-family:monospace;">SuerEcho<span style="color:#58a6ff;">Y</span></div><div class="hero-nav-links"><a href="#" onclick="scrollToBlog(); return false;">📝 文章导航</a><a href="/portfolio.html">🚀 工程项目</a><a href="/about.html">👨‍💻 关于我</a></div></div><div class="hero-content"><img src="https://github.com/SuerEchoY.png" class="hero-avatar"><div class="typewriter">从底层硅片到具身智能的全栈探索 🤖</div></div><div class="scroll-down" onclick="scrollToBlog();">⯆</div>'; document.body.insertBefore(hero, document.body.firstChild); } });</script>
 
 </head>
 <style>
@@ -43,7 +43,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 }
 
 </style>
-<style>.intro-card { background: linear-gradient(135deg, rgba(0,107,117,0.1) 0%, rgba(38,166,65,0.1) 100%); border: 1px solid #26a641; border-radius: 12px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); backdrop-filter: blur(5px); } .intro-card h3 { margin-top: 0; color: #26a641; font-size: 1.5em; } .intro-card p { margin-bottom: 10px; color: var(--color-fg-default); line-height: 1.6; } .intro-links { margin-top: 20px; } .intro-links a { display: inline-block; margin-right: 15px; padding: 8px 18px; background: #26a641; color: #fff !important; border-radius: 6px; text-decoration: none; font-weight: bold; transition: all 0.3s ease; } .intro-links a:hover { background: #1e8733; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(38,166,65,0.4); } .SideNav-item { background: var(--color-canvas-subtle); border: 1px solid var(--color-border-default); border-radius: 10px !important; margin-bottom: 15px; padding: 16px; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); } .SideNav-item:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(38,166,65,0.15); border-color: #26a641; border-left: 6px solid #26a641; } .avatar { border-radius: 50%; box-shadow: 0 0 20px rgba(38,166,65,0.5); border: 2px solid #26a641; transition: transform 0.5s ease; } .avatar:hover { transform: rotate(360deg); }</style>
+<style>body.home-page .Header { display: none !important; } body.home-page .container { margin-top: 100vh !important; position: relative; z-index: 10; padding-top: 50px; background: var(--color-canvas-default); } #custom-hero { position: absolute; top: 0; left: 0; width: 100%; height: 100vh; background: url('https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover; z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; } #custom-hero::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.5); z-index: 1; } .hero-nav { position: absolute; top: 0; width: 100%; height: 65px; background: rgba(15,15,15,0.3); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; box-sizing: border-box; border-bottom: 1px solid rgba(255,255,255,0.1); } .hero-nav-links a { color: #e1e4e8; text-decoration: none; margin-left: 25px; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; } .hero-nav-links a:hover { color: #58a6ff; } .hero-content { z-index: 10; text-align: center; color: white; display: flex; flex-direction: column; align-items: center; } .hero-avatar { width: 120px; height: 120px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); box-shadow: 0 0 30px rgba(88,166,255,0.6); margin-bottom: 30px; transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); object-fit: cover; } .hero-avatar:hover { transform: scale(1.1) rotate(360deg); } .typewriter { display: inline-block; padding: 12px 25px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 30px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font-size: 1.2rem; font-family: monospace; letter-spacing: 1px; color: #fff; white-space: nowrap; overflow: hidden; border-right: 3px solid #58a6ff; animation: typing 3.5s steps(40, end), blink .75s step-end infinite; } @keyframes typing { from { width: 0 } to { width: 100% } } @keyframes blink { from, to { border-color: transparent } 50% { border-color: #58a6ff; } } .scroll-down { position: absolute; bottom: 40px; z-index: 10; color: rgba(255,255,255,0.6); font-size: 2.5rem; cursor: pointer; animation: float 2s ease-in-out infinite; transition: color 0.3s; } .scroll-down:hover { color: #fff; } @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } } .SideNav-item { background: var(--color-canvas-subtle); border-radius: 12px !important; margin-bottom: 16px; padding: 16px; transition: all 0.3s ease; border: 1px solid var(--color-border-default); display: block; } .SideNav-item:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(88,166,255,0.15); border-color: #58a6ff; } </style>
 
 
 
@@ -102,13 +102,13 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li><strong>图像流处理：</strong> 实现了基于 Verilog 的图像滤波、边缘检测及色彩空间转换流水线。</li>
 <li><strong>高速传输：</strong> 负责高速接口的时序收敛与数据缓存设计。</li>
 </ul></div>
-<div style="font-size:small;margin-top:8px;float:right;">Powered by Gmeek | Code is Law, Hardware is the World.</div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
 <div class="comments" id="comments"></div>
 
 </div>
-    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://SuerEchoY.github.io">SuerEchoY's Matrix</a></div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://SuerEchoY.github.io">SuerEchoY</a></div>
 <div id="footer2">
     <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
 </div>
