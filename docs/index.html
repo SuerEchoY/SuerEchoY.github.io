@@ -1,170 +1,633 @@
 <!DOCTYPE html>
-<html data-color-mode="light" data-dark-theme="dark_dimmed" data-light-theme="dark_dimmed" lang="zh-CN">
+<html lang="zh-CN">
 <head>
-    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
-    
-    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
-        let theme = localStorage.getItem("meek_theme") || "light";
-        document.documentElement.setAttribute("data-color-mode", theme);
-    </script>
-<meta name="description" content="连接底层硅片与具身智能">
-<meta property="og:title" content="SuerEchoY">
-<meta property="og:description" content="连接底层硅片与具身智能">
-<meta property="og:type" content="blog">
-<meta property="og:url" content="https://SuerEchoY.github.io">
-<meta property="og:image" content="https://github.com/SuerEchoY.png">
-<title>SuerEchoY</title>
-
-</head>
-<style>
-body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
-#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
-#footer {margin-top:64px; text-align: center;font-size: small;}
-
-</style>
-
-<style>
-.avatar {transition: 0.8s;width:64px;height:64px;object-fit: cover;}
-.avatar:hover{transform: scale(1.15) rotate(360deg);}
-.title-left a{color:inherit;text-decoration:none;vertical-align: bottom;font-size:40px;font-weight: bold;font-family:Monaco;margin-left:8px;}
-.title-right{display:flex;margin:auto 0 0 auto;}
-.title-right button{margin-right:8px;padding:16px;}
-.title-right .circle{padding: 14px 16px;}
-
-.SideNav{min-width: 360px;}
-.SideNav-icon{margin-right: 16px}
-.SideNav-item .Label{color: #fff;margin-left:4px;}
-.d-flex{min-width:0;}
-.listTitle{overflow:hidden;white-space:nowrap;text-overflow: ellipsis;max-width: 100%;}
-.listLabels{white-space:nowrap;display:flex;}
-.listLabels object{max-height:16px;max-width:24px;}
-
-@media (max-width: 600px) {
-    body {padding: 8px;}
-    .avatar {width:40px;height:40px;}
-    .blogTitle{display:none;}
-    #buttonRSS{display:none;}
-    .LabelTime{display:none;}
-}
-</style>
-
-
-
-<body>
-    <div id="header">
-<div class="title-left">
-    <img src="https://github.com/SuerEchoY.png" class="avatar circle" id="avatarImg" alt="avatar"><a class="blogTitle">SuerEchoY</a></div>
-<div class="title-right">
-    <a href="https://SuerEchoY.github.io/tag.html" id="buttonSearch" class="btn btn-invisible circle" title="搜索">
-        <svg class="octicon" width="16" height="16" >
-            <path id="pathSearch" fill-rule="evenodd"></path>
-        </svg>
-    </a>
-    <a href="https://github.com/SuerEchoY" class="btn btn-invisible circle" title="GitHub" target="_blank">
-        <svg class="octicon" width="16" height="16" >
-            <path id="GitHub" fill-rule="evenodd"></path>
-        </svg>
-    </a>
-    
-    <a href="https://SuerEchoY.github.io/rss.xml" target="_blank" id="buttonRSS" class="btn btn-invisible circle" title="RSS">
-        <svg class="octicon" width="16" height="16" >
-            <path id="pathRSS" fill-rule="evenodd"></path>
-        </svg>
-    </a>
-    <a class="btn btn-invisible circle" onclick="modeSwitch()" title="切换主题">
-        <svg class="octicon" width="16" height="16" >
-            <path id="themeSwitch" fill-rule="evenodd"></path>
-        </svg>
-    </a>
-</div>
-</div>
-    <div id="content">
-<div style="margin-bottom: 16px;">连接底层硅片与具身智能</div>
-<nav class="SideNav border">
-<a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/ge-ren-zhu-ye.html">
-    <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
-        </svg>
-        <span class="listTitle">个人主页</span>
-    </div>
-    <div class="listLabels">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的主页 - 机器人与底层系统工程师</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 引入现代字体 */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
         
-        <span class="Label LabelName" style="background-color:#0075ca"><object><a style="color:#fff" href="tag.html#documentation">documentation</a></object></span>
-        <span class="Label LabelTime" style="background-color:#0e4429">2026-04-04</span>
+        /* 极客风科技网格背景 */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+        }
+        /* 隐藏滚动条 */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* 自定义高亮代码块风格 */
+        .code-block {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 bg-grid min-h-screen relative">
+
+    <nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center relative z-10">
+        <div class="text-2xl font-extrabold tracking-tighter text-gray-900">Dev<span class="text-indigo-600">Profile.</span></div>
+        <div class="space-x-6 text-sm font-semibold hidden md:block">
+            <a href="#about" class="hover:text-indigo-600 transition">关于我</a>
+            <a href="#stack" class="hover:text-indigo-600 transition">技能矩阵</a>
+            <a href="#projects" class="hover:text-indigo-600 transition">精选项目</a>
+        </div>
+    </nav>
+
+    <header id="about" class="max-w-4xl mx-auto px-6 pt-12 pb-20 flex flex-col items-center text-center relative z-10">
+        <div class="w-32 h-32 rounded-full bg-gradient-to-tr from-indigo-500 to-cyan-400 p-1 mb-8 shadow-lg hover:scale-105 transition-transform duration-300">
+            <div class="w-full h-full bg-white rounded-full border-4 border-white flex items-center justify-center overflow-hidden">
+                <span class="text-3xl font-bold text-gray-300">HW/SW</span>
+            </div>
+        </div>
+        
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 mb-4">
+            你好，我是 <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-500">[你的名字]</span>
+        </h1>
+        <h2 class="text-xl md:text-2xl font-semibold text-gray-600 mb-8">
+            机器人系统与底层架构工程师
+        </h2>
+        <p class="text-lg text-gray-500 max-w-2xl leading-relaxed">
+            致力于打通从底层硅核到具身智能的全链路工程。拥有 8500+ 行复杂 C++ 系统的独立开发经验。精通四足机器人的感知、规划与高频运控，并具备扎实的 FPGA 硬件加速与 Linux 驱动底层架构能力。
+        </p>
+    </header>
+
+    <section id="stack" class="max-w-6xl mx-auto px-6 py-10 relative z-10">
+        <div class="flex flex-col items-center mb-16">
+            <h3 class="text-3xl font-extrabold text-gray-900 mb-4">技术栈与核心竞争力</h3>
+            <div class="h-1 w-20 bg-indigo-600 rounded-full"></div>
+            <p class="mt-4 text-gray-500 text-sm">点击各个模块查看底层技术细节</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="tech-card group bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:border-emerald-500 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer relative flex flex-col justify-between" data-target="robotics">
+                <div>
+                    <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A2 2 0 013 15.488V5.488a2 2 0 011.553-1.954L9 2l5.447 2.724A2 2 0 0116 6.678v9.81a2 2 0 01-1.553 1.954L9 20z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-4 group-hover:text-emerald-600 transition-colors">全栈导航与算法设计</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                        独立开发 8500 行规模的四足导航系统。精通 8 种图搜索与采样规划算法，具备强化学习训练经验与自研规划算法落地能力。
+                    </p>
+                </div>
+                <div class="text-emerald-500 text-sm font-semibold flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    解析算法栈 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </div>
+
+            <div class="tech-card group bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:border-indigo-500 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer relative flex flex-col justify-between" data-target="software">
+                <div>
+                    <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-4 group-hover:text-indigo-600 transition-colors">高并发与 C++ 系统工程</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                        极致的工程架构能力。熟练运用 std::atomic / std::mutex 构建线程安全的 ROS2 节点，精通状态机 (FSM) 设计与底层驱动开发。
+                    </p>
+                </div>
+                <div class="text-indigo-500 text-sm font-semibold flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    解析工程架构 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </div>
+
+            <div class="tech-card group bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:border-slate-800 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer relative flex flex-col justify-between" data-target="hardware">
+                <div>
+                    <div class="w-14 h-14 bg-slate-100 text-slate-800 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-slate-800 group-hover:text-white transition-all duration-300">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-4 group-hover:text-slate-800 transition-colors">FPGA 与底层通信协议</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                        跨界硬件能力。精通 HDL，熟练实现 PCIe/NVMe 初始化与协议栈，具备复杂视觉算法 (SIFT) 的 RTL 级硬件加速部署经验。
+                    </p>
+                </div>
+                <div class="text-slate-800 text-sm font-semibold flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    解析硬件栈 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="max-w-6xl mx-auto px-6 py-20 relative z-10">
+        <div class="flex flex-col items-center mb-16">
+            <h3 class="text-3xl font-extrabold text-gray-900 mb-4">精选工程项目</h3>
+            <p class="text-gray-500">具备强工业落地价值的复杂系统开发实录</p>
+        </div>
+
+        <div class="space-y-12">
+            
+            <div class="tech-card relative group bg-white rounded-3xl border border-gray-100 overflow-hidden flex flex-col lg:flex-row shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer" data-target="unitree_nav">
+                <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-500 to-teal-400"></div>
+                <div class="lg:w-1/3 bg-slate-900 flex flex-col items-center justify-center p-8 overflow-hidden relative">
+                    <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+                    <div class="relative z-10 text-center mb-6">
+                        <div class="text-emerald-400 text-xs font-mono mb-2 uppercase tracking-widest">8500 Lines of C++</div>
+                        <div class="text-white text-xl font-bold italic tracking-tighter">UNITREE GO2 NAV</div>
+                    </div>
+                    <div class="relative z-10 grid grid-cols-2 gap-2 text-xs">
+                        <div class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1.5 rounded text-center">8种规划算法</div>
+                        <div class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1.5 rounded text-center">10Hz 控制频</div>
+                        <div class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1.5 rounded text-center col-span-2">自研 RRCT 核心算法</div>
+                    </div>
+                </div>
+                <div class="lg:w-2/3 p-10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-2xl font-bold text-gray-900">宇树 Go2 四足机器人全栈自主导航系统</h4>
+                            <span class="text-xs font-bold py-1 px-3 bg-emerald-50 text-emerald-600 rounded-full border border-emerald-100 group-hover:bg-emerald-600 group-hover:text-white transition-colors">点击查看架构图与代码剖析</span>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed text-sm mb-6">
+                            基于 Lightning-LM SLAM 框架，独立设计并实现了四足机器人的感知、全局导航与运动控制三大模块。项目规模达 8500+ 行，规划成功率超 95%，已通过真机极限场景验证。
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 mb-6">
+                            <div class="text-sm text-gray-700">
+                                <span class="font-bold text-emerald-600">● 规划层 (7058行)：</span> 集成 A*, JPS, Bit*, RRT* 等 8 种算法。自研 RRCT 算法，通过拐角检测与 B 样条优化，规划提速 35%。
+                            </div>
+                            <div class="text-sm text-gray-700">
+                                <span class="font-bold text-emerald-600">● 控制层 (1368行)：</span> 多线程管理 12-DOF 关节，设计 4 种控制 FSM 与 20+ 运动原语。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-lg uppercase tracking-wider">C++ 17</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-lg uppercase tracking-wider">ROS2 / FSM</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-lg uppercase tracking-wider">PCL / OpenCV</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-card relative group bg-white rounded-3xl border border-gray-100 overflow-hidden flex flex-col lg:flex-row shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer" data-target="rl_sim2real">
+                <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-orange-500 to-amber-400"></div>
+                <div class="lg:w-1/3 bg-slate-900 flex flex-col items-center justify-center p-8 overflow-hidden relative">
+                    <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+                    <div class="relative z-10 text-center mb-6">
+                        <div class="text-orange-400 text-xs font-mono mb-2 uppercase tracking-widest">Reinforcement Learning</div>
+                        <div class="text-white text-xl font-bold italic tracking-tighter">SIM2REAL-GO2</div>
+                    </div>
+                    <div class="relative z-10 grid grid-cols-2 gap-2 text-xs">
+                        <div class="bg-orange-500/20 text-orange-300 border border-orange-500/30 px-3 py-1.5 rounded text-center">Isaac Lab</div>
+                        <div class="bg-orange-500/20 text-orange-300 border border-orange-500/30 px-3 py-1.5 rounded text-center">MuJoCo</div>
+                        <div class="bg-orange-500/20 text-orange-300 border border-orange-500/30 px-3 py-1.5 rounded text-center col-span-2">Zero-Shot 物理机部署</div>
+                    </div>
+                </div>
+                <div class="lg:w-2/3 p-10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-2xl font-bold text-gray-900">四足机器人强化学习与 Sim2Real 跨障系统</h4>
+                            <span class="text-xs font-bold py-1 px-3 bg-orange-50 text-orange-600 rounded-full border border-orange-100 group-hover:bg-orange-600 group-hover:text-white transition-colors">点击查看训练与迁移细节</span>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed text-sm mb-6">
+                            基于深度强化学习构建四足机器人运动控制策略。在物理仿真引擎中完成模型训练，并成功跨越现实鸿沟 (Reality Gap)，在 Unitree 实机上完成自动化跨障部署。
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 mb-6">
+                            <div class="text-sm text-gray-700">
+                                <span class="font-bold text-orange-600">● 仿真与训练：</span> 依托 NVIDIA Isaac Lab 构建并行训练环境，设计多维度 Reward 函数引导机器狗学习稳定步态。
+                            </div>
+                            <div class="text-sm text-gray-700">
+                                <span class="font-bold text-orange-600">● 验证与迁移：</span> 引入 Domain Randomization 提升环境鲁棒性；通过 MuJoCo 进行跨引擎验证，打通 SDK 实现真机落地。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-lg uppercase tracking-wider">Isaac Lab / MuJoCo</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-lg uppercase tracking-wider">Sim2Real</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-lg uppercase tracking-wider">PPO Algorithm</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-card relative group bg-white rounded-3xl border border-gray-100 overflow-hidden flex flex-col lg:flex-row shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer" data-target="nvme_storage">
+                <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-slate-600 to-gray-400"></div>
+                <div class="lg:w-1/3 bg-slate-900 flex flex-col items-center justify-center p-8 overflow-hidden relative">
+                    <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+                    <div class="relative z-10 text-center mb-6">
+                        <div class="text-slate-400 text-xs font-mono mb-2 uppercase tracking-widest">High-Speed HW</div>
+                        <div class="text-white text-xl font-bold italic tracking-tighter">NVME-STORAGE</div>
+                    </div>
+                    <div class="relative z-10 grid grid-cols-2 gap-2 text-xs">
+                        <div class="bg-slate-500/20 text-slate-300 border border-slate-500/30 px-3 py-1.5 rounded text-center">纯硬件协议栈</div>
+                        <div class="bg-slate-500/20 text-slate-300 border border-slate-500/30 px-3 py-1.5 rounded text-center">PCIe / XDMA</div>
+                        <div class="bg-slate-500/20 text-slate-300 border border-slate-500/30 px-3 py-1.5 rounded text-center col-span-2">超高速视频流直接存储</div>
+                    </div>
+                </div>
+                <div class="lg:w-2/3 p-10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-2xl font-bold text-gray-900">基于硬件 NVMe 协议栈的高速视频存储系统</h4>
+                            <span class="text-xs font-bold py-1 px-3 bg-slate-100 text-slate-600 rounded-full border border-slate-200 group-hover:bg-slate-800 group-hover:text-white transition-colors">点击查看协议栈架构解析</span>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed text-sm mb-6">
+                            摒弃传统软核方案，完全基于 FPGA 硬件逻辑实现极客级的高速数据总线通信与存储协议栈架构。打通了从底层物理总线到上层文件系统的壁垒。
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 mb-6">
+                            <div class="text-sm text-gray-700">
+                                <span class="font-bold text-slate-800">● 协议层突破：</span> 独立开发简易版 NVMe 硬件协议栈，完成 Admin/IO 队列深度管理与高吞吐命令封包机制。
+                            </div>
+                            <div class="text-sm text-gray-700">
+                                <span class="font-bold text-slate-800">● 物理层建构：</span> 依托 XDMA 实现 PCIe Endpoint 控制器设计，彻底打通 Type0 配置与核心 BAR 空间寄存器映射。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-lg uppercase tracking-wider">Verilog / HDL</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-lg uppercase tracking-wider">PCIe Gen3</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-lg uppercase tracking-wider">NVMe Protocol</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-card relative group bg-white rounded-3xl border border-gray-100 overflow-hidden flex flex-col lg:flex-row shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer" data-target="sift_accel">
+                <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-indigo-500 to-blue-400"></div>
+                <div class="lg:w-1/3 bg-slate-900 flex flex-col items-center justify-center p-8 overflow-hidden relative">
+                    <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+                    <div class="relative z-10 text-center mb-6">
+                        <div class="text-indigo-400 text-xs font-mono mb-2 uppercase tracking-widest">Hetero-Computing</div>
+                        <div class="text-white text-xl font-bold italic tracking-tighter">SIFT-ACCEL</div>
+                    </div>
+                    <div class="relative z-10 grid grid-cols-2 gap-2 text-xs">
+                        <div class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-3 py-1.5 rounded text-center">RTL级流水线</div>
+                        <div class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-3 py-1.5 rounded text-center">AXI4-DMA</div>
+                        <div class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-3 py-1.5 rounded text-center col-span-2">软硬件异构协同</div>
+                    </div>
+                </div>
+                <div class="lg:w-2/3 p-10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-2xl font-bold text-gray-900">异构平台下的 SIFT 特征提取与硬件加速</h4>
+                            <span class="text-xs font-bold py-1 px-3 bg-indigo-50 text-indigo-600 rounded-full border border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white transition-colors">点击查看 RTL 部署细节</span>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed text-sm mb-6">
+                            实现复杂计算机视觉算法（SIFT）从 Matlab 理论验证，到 FPGA 硬件流水线加速部署的全流程架构。构建了上位机与底层逻辑的极致协同。
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 mb-6">
+                            <div class="text-sm text-gray-700">
+                                <span class="font-bold text-indigo-600">● 算法逻辑化：</span> 将 Harris 角点检测、CORDIC 运算及高斯消元求解等复杂数学模型转化为高效的 RTL 级硬件映射。
+                            </div>
+                            <div class="text-sm text-gray-700">
+                                <span class="font-bold text-indigo-600">● 软硬协同流：</span> 自研支持任意长度的多通道 AXI4-DMA；开发 Qt 上位机，经由 XDMA 高速下发特征矩阵实现协同计算。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-lg uppercase tracking-wider">AXI4-DMA / XDMA</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-lg uppercase tracking-wider">Computer Vision</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-lg uppercase tracking-wider">Qt / C++</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="border-t border-gray-200 bg-white py-10 mt-10 text-center text-gray-500 text-sm relative z-10">
+        <p class="font-semibold text-gray-800 mb-2">Build with Engineering Aesthetics</p>
+        <p>&copy; 2026. All Rights Reserved.</p>
+    </footer>
+
+    <div id="infoModal" class="fixed inset-0 bg-gray-900 bg-opacity-60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-50 flex items-center justify-center px-4 py-10">
+        <div id="modalContent" class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl transform scale-95 opacity-0 transition-all duration-300 flex flex-col max-h-full">
+            
+            <div id="modalHeader" class="px-8 py-6 border-b border-gray-100 flex justify-between items-center text-white flex-shrink-0">
+                <div class="flex items-center">
+                    <div id="modalIcon" class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mr-4"></div>
+                    <h2 id="modalTitle" class="text-2xl font-bold tracking-tight">加载中...</h2>
+                </div>
+                <button id="closeModalBtn" class="text-white/70 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <div class="p-8 overflow-y-auto no-scrollbar flex-1 bg-gray-50/50" id="modalBody">
+                </div>
+            
+        </div>
     </div>
-</a>
-</nav>
-</div>
-    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://SuerEchoY.github.io">SuerEchoY</a></div>
-<div id="footer2">
-    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
-</div>
 
-<script>
-var now=new Date();
-document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+    <script>
+        // --- 核心数据配置 ---
+        const contentData = {
+            // ==================== 项目深度解析 ====================
+            unitree_nav: {
+                title: "深度剖析：8500行全栈自主导航系统",
+                themeClass: "bg-slate-900", // 极客黑主题
+                icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>`,
+                html: `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 text-center shadow-sm">
+                            <div class="text-3xl font-black text-indigo-600 mb-1">8,500+</div>
+                            <div class="text-xs text-gray-500 uppercase font-bold">C++ 核心代码量</div>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 text-center shadow-sm">
+                            <div class="text-3xl font-black text-emerald-600 mb-1">8 种</div>
+                            <div class="text-xs text-gray-500 uppercase font-bold">主流+自研规划算法</div>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 text-center shadow-sm">
+                            <div class="text-3xl font-black text-orange-500 mb-1">&lt; 150ms</div>
+                            <div class="text-xs text-gray-500 uppercase font-bold">全链路系统延迟</div>
+                        </div>
+                    </div>
 
-if("04/04/2026"!=""){
-    var startSite=new Date("04/04/2026");
-    var diff=now.getTime()-startSite.getTime();
-    var diffDay=Math.floor(diff/(1000*60*60*24));
-    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
-}
-</script></div>
+                    <h4 class="text-lg font-bold text-gray-900 mb-3 flex items-center"><span class="w-2 h-6 bg-emerald-500 rounded-full mr-3"></span>1. 自研核心算法：RRCT (2,538行)</h4>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm mb-6 text-sm text-gray-600 leading-relaxed">
+                        <p class="mb-3">针对室内走廊与复杂障碍环境，在 RRT 基础上进行了三维度的底层重构：</p>
+                        <ul class="list-disc pl-5 space-y-2 mb-4">
+                            <li><strong>拐角检测优化 (Corner Detection)：</strong>利用角度变化率过滤非必要采样，检测阈值设为15°。</li>
+                            <li><strong>轨迹平滑 (Trajectory Refinement)：</strong>植入 B 样条插值算法，消除机器人运动时的急停急转。</li>
+                            <li><strong>自适应采样：</strong>动态调整区域采样密度，直线极简、拐角稠密。</li>
+                        </ul>
+                        <div class="bg-emerald-50 text-emerald-700 p-3 rounded-lg border border-emerald-100 font-semibold">
+                            📈 实测收益：相比原生 RRT*，规划时间缩减 35% (189ms -> 123ms)，执行成功率稳定超 95%。
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-bold text-gray-900 mb-3 flex items-center"><span class="w-2 h-6 bg-indigo-500 rounded-full mr-3"></span>2. 工业级运动控制线程 (1,368行)</h4>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm mb-6 text-sm text-gray-600 leading-relaxed">
+                        <p class="mb-3">采用基于 <code>std::atomic</code> 无锁编程与 <code>std::mutex</code> 保护的异步多线程架构，确保 10Hz 实时控制循环永不阻塞：</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                                <span class="font-bold text-gray-800 block mb-2">4 大状态机 (FSM) 架构：</span>
+                                距离控制 / 角度控制 / 9状态复杂位姿控制 / 自动化导航裁决
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                                <span class="font-bold text-gray-800 block mb-2">20+ 硬件运动原语：</span>
+                                封装 Unitree SDK，支持底盘速度下发、关节力矩反馈与复杂特技动作。
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-bold text-gray-900 mb-3 flex items-center"><span class="w-2 h-6 bg-blue-500 rounded-full mr-3"></span>3. 系统级架构流转</h4>
+                    <div class="code-block">
+// [感知] Lightning-LM SLAM (Pointcloud2) -> 
+// [处理] PCL降采样 -> OpenCV 2D占据栅格化 -> 自适应阈值化 ->
+// [规划] unitree_go2_global_navigation (8种算法多路复用) ->
+// [控制] unitree_go2_driver_ctrl (Nav Thread -> FSM -> SDK) ->
+// [执行] Unitree Go2 物理电机 (12-DOF 反馈)
+                    </div>
+                `
+            },
+
+            rl_sim2real: {
+                title: "深度剖析：强化学习与 Sim2Real 部署",
+                themeClass: "bg-orange-600", // 强化学习标志色
+                icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>`,
+                html: `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 text-center shadow-sm">
+                            <div class="text-3xl font-black text-orange-600 mb-1">Isaac Lab</div>
+                            <div class="text-xs text-gray-500 uppercase font-bold">高并发仿真训练</div>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 text-center shadow-sm">
+                            <div class="text-3xl font-black text-amber-500 mb-1">MuJoCo</div>
+                            <div class="text-xs text-gray-500 uppercase font-bold">跨引擎动力学验证</div>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 text-center shadow-sm">
+                            <div class="text-3xl font-black text-emerald-500 mb-1">Zero-Shot</div>
+                            <div class="text-xs text-gray-500 uppercase font-bold">真机零样本迁移</div>
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-bold text-gray-900 mb-3 flex items-center"><span class="w-2 h-6 bg-orange-500 rounded-full mr-3"></span>1. 物理仿真与策略训练</h4>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm mb-6 text-sm text-gray-600 leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-3">
+                            <li><strong>环境搭建：</strong>基于英伟达 Isaac Lab 构建高度并行化的四足机器人仿真环境，极大加速经验池 (Replay Buffer) 的数据采样效率。</li>
+                            <li><strong>奖励函数工程 (Reward Shaping)：</strong>针对跨障任务，设计包含线速度跟踪、角速度惩罚、基座姿态稳定度及能量消耗在内的多项式奖励函数，引导模型收敛至鲁棒步态。</li>
+                            <li><strong>算法实现：</strong>采用 PPO (Proximal Policy Optimization) 强化学习算法进行端到端训练，网络输出直接映射为 12 个自由度关节的目标位置指令。</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="text-lg font-bold text-gray-900 mb-3 flex items-center"><span class="w-2 h-6 bg-amber-500 rounded-full mr-3"></span>2. 跨越 Reality Gap (Sim2Real)</h4>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm mb-6 text-sm text-gray-600 leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-3">
+                            <li><strong>域随机化 (Domain Randomization)：</strong>在训练周期内对机器人质量、质心位置、电机摩擦系数、地面摩擦力及传感器噪声注入均匀分布的随机扰动，提升策略在未知物理环境下的泛化能力。</li>
+                            <li><strong>双引擎验证机制：</strong>将 Isaac Lab 训练输出的模型导入 MuJoCo 引擎进行纯动力学交叉验证，有效规避由单一物理引擎计算特性（如穿模或碰撞解算 Bug）导致的“奇异步态”。</li>
+                            <li><strong>真机硬件落地：</strong>开发底层 C++ 推理节点，通过网络层与 Unitree SDK 底层指令接口打通，最终在 Unitree Go2 物理实体上实现了平稳、无额外微调的跨障部署。</li>
+                        </ul>
+                    </div>
+                `
+            },
+
+            nvme_storage: {
+                title: "深度剖析：纯硬件 NVMe 协议栈开发",
+                themeClass: "bg-slate-800",
+                icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>`,
+                html: `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center">
+                            <div class="w-12 h-12 bg-slate-100 text-slate-700 rounded-full flex items-center justify-center font-bold text-xl mr-4">HW</div>
+                            <div>
+                                <div class="font-bold text-slate-800">全硬件协议解包</div>
+                                <div class="text-xs text-gray-500">摒弃软核 CPU 瓶颈</div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center">
+                            <div class="w-12 h-12 bg-slate-100 text-slate-700 rounded-full flex items-center justify-center font-bold text-xl mr-4">PCIe</div>
+                            <div>
+                                <div class="font-bold text-slate-800">Endpoint 控制器搭建</div>
+                                <div class="text-xs text-gray-500">BAR 空间精确映射</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-bold text-gray-900 mb-3 flex items-center"><span class="w-2 h-6 bg-slate-600 rounded-full mr-3"></span>核心技术突破</h4>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm mb-6 text-sm text-gray-600 leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-3">
+                            <li><strong>PCIe 物理层交互：</strong>利用 XDMA 完成 PCIe Endpoint 配置，深度解析 Type0 空间，实现底层寄存器握手。</li>
+                            <li><strong>NVMe Admin/IO 队列控制：</strong>独立编写硬件逻辑管理 Submission Queue (SQ) 与 Completion Queue (CQ) 的门铃机制，实现低延迟命令封包与状态轮询。</li>
+                            <li><strong>AXI4 仲裁机制：</strong>自研带优先级调度的 AXI4-DMA 控制器，解决大块视频流数据与小块控制指令的总线冲突问题。</li>
+                        </ul>
+                    </div>
+                `
+            },
+
+            sift_accel: {
+                title: "深度剖析：SIFT 异构计算硬件加速",
+                themeClass: "bg-indigo-700",
+                icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>`,
+                html: `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center">
+                            <div class="w-12 h-12 bg-indigo-50 text-indigo-700 rounded-full flex items-center justify-center font-bold text-xl mr-4">RTL</div>
+                            <div>
+                                <div class="font-bold text-indigo-800">全硬件流水线设计</div>
+                                <div class="text-xs text-gray-500">将数学模型 RTL 化</div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center">
+                            <div class="w-12 h-12 bg-indigo-50 text-indigo-700 rounded-full flex items-center justify-center font-bold text-xl mr-4">QT</div>
+                            <div>
+                                <div class="font-bold text-indigo-800">异构协同计算</div>
+                                <div class="text-xs text-gray-500">PC 上位机硬交互</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-bold text-gray-900 mb-3 flex items-center"><span class="w-2 h-6 bg-indigo-500 rounded-full mr-3"></span>硬件重构与算法映射</h4>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm mb-6 text-sm text-gray-600 leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-3">
+                            <li><strong>高斯金字塔与角点检测：</strong>通过硬件流水线实现高斯模糊滤波与 Harris 响应值计算，极大提升像素级处理带宽。</li>
+                            <li><strong>复杂数学底层化：</strong>利用 CORDIC 算法硬件计算梯度幅值与方向角，开发 LFSR 及高斯消元阵列求解器的 Verilog 模块。</li>
+                            <li><strong>软硬分离架构：</strong>FPGA 负责高密度的像素级特征提取计算，提取出的特征描述子经由自研多通道 AXI4-DMA 和 XDMA 回传至 Qt 上位机，最终由 CPU 完成低密度高复杂度的图像拼接。</li>
+                        </ul>
+                    </div>
+                `
+            },
+            
+            // ==================== 技能矩阵解析 (完整详情版) ====================
+            robotics: {
+                title: "机器人系统与算法栈", themeClass: "bg-emerald-600",
+                icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A2 2 0 013 15.488V5.488a2 2 0 011.553-1.954L9 2l5.447 2.724A2 2 0 0116 6.678v9.81a2 2 0 01-1.553 1.954L9 20z"></path></svg>`,
+                html: `
+                    <div class="space-y-4">
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <h5 class="text-lg font-bold text-gray-800 mb-4 border-b border-gray-50 pb-2">SLAM 感知与建图</h5>
+                            <ul>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-emerald-500"></span><span>深入优化 Faster-LIO 算法，实现 ICP 点面匹配前 X/Y/Z 方向的解耦预匹配，有效抑制 Z 轴漂移。</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <h5 class="text-lg font-bold text-gray-800 mb-4 border-b border-gray-50 pb-2">路径规划与自主导航</h5>
+                            <ul>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-emerald-500"></span><span>精通图搜索算法 (A*, Theta*) 与随机采样算法 (RRT 系列)。</span></li>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-emerald-500"></span><span>完成基于 TRG Planner 的二次开发，提出融合风险值的全局路径随机采样优化机制，提升非结构化地形下的规划性能。</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <h5 class="text-lg font-bold text-gray-800 mb-4 border-b border-gray-50 pb-2">强化学习与 Sim2Real</h5>
+                            <ul>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-emerald-500"></span><span>依托 NVIDIA Isaac Lab 与 MuJoCo 构建高保真物理仿真框架。</span></li>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-emerald-500"></span><span>完成 Unitree Go2 四足机器人跨障任务的模型训练，并成功实施 Sim2Real 物理实车策略部署。</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <h5 class="text-lg font-bold text-gray-800 mb-4 border-b border-gray-50 pb-2">传感器协同</h5>
+                            <ul>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-emerald-500"></span><span>主导多传感器 (IMU, 相机, GPS) 硬件同步调优，实现 NMEA 数据帧解析及 ROS 底层封装。</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            software: {
+                title: "高并发与 C++ 工程", themeClass: "bg-indigo-600",
+                icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>`,
+                html: `
+                    <div class="space-y-4">
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <h5 class="text-lg font-bold text-gray-800 mb-4 border-b border-gray-50 pb-2">Linux 内核与驱动</h5>
+                            <ul>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-indigo-500"></span><span>精通 Linux 字符设备驱动架构，熟悉设备树 (Device Tree)、PlatformIO 总线。</span></li>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-indigo-500"></span><span>熟练开发基于中断、GPIO、pinctrl 子系统以及 IIC/SPI 协议的底层驱动。</span></li>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-indigo-500"></span><span>具备 Linux 系统级移植经验，涵盖 U-boot、内核裁剪与 Rootfs 根文件系统构建。</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <h5 class="text-lg font-bold text-gray-800 mb-4 border-b border-gray-50 pb-2">软件工程与系统编程</h5>
+                            <ul>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-indigo-500"></span><span>扎实的 C/C++ (Modern C++) 与 Python 编程功底，熟练运用常用数据结构与算法。</span></li>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-indigo-500"></span><span>精通 Linux 多线程与进程间通信 (IPC) 机制，包括管道、共享内存、消息队列与同步锁。</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <h5 class="text-lg font-bold text-gray-800 mb-4 border-b border-gray-50 pb-2">嵌入式与工控系统</h5>
+                            <ul>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-indigo-500"></span><span>精通 STM32 与 ESP8266 裸机开发 (UART, CAN, 定时器, PWM)。</span></li>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-indigo-500"></span><span>具备工控 PLC 梯形图开发经验，可独立实现自动化机械臂/起重机的指令控制。</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <h5 class="text-lg font-bold text-gray-800 mb-4 border-b border-gray-50 pb-2">可视化与工具链</h5>
+                            <ul>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-indigo-500"></span><span>精通 Qt / MFC 上位机多线程开发，独立重构过类似 RViz 的 3D 点云与代价地图渲染工具。</span></li>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-indigo-500"></span><span>熟练掌握 CMake, Makefile 及 Shell 自动化脚本构建体系。</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            hardware: {
+                title: "FPGA 与硬件加速", themeClass: "bg-slate-800",
+                icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>`,
+                html: `
+                    <div class="space-y-4">
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <h5 class="text-lg font-bold text-gray-800 mb-4 border-b border-gray-50 pb-2">高速总线与协议栈</h5>
+                            <ul>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-slate-600"></span><span>深度掌握 NVMe 协议栈原理，完全基于 FPGA 实现 NVMe 初始化、Admin/IO 队列控制与命令封包解包。</span></li>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-slate-600"></span><span>精通 PCIe (Type0 配置与 BAR 空间映射) 架构及 XDMA 驱动层通路搭建。</span></li>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-slate-600"></span><span>熟练实现 AXI4, SRIO, GTX, MIPI CSI-2 及 UDP 等高速数据流协议接口。</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <h5 class="text-lg font-bold text-gray-800 mb-4 border-b border-gray-50 pb-2">算法级 RTL 部署</h5>
+                            <ul>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-slate-600"></span><span>基于 Verilog/System Verilog 完成 SIFT 图像拼接算法 (Harris 检测, CORDIC 运算, LFSR, 高斯消元) 的纯硬件加速流水线设计。</span></li>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-slate-600"></span><span>设计开发带有复杂仲裁机制的多通道 AXI4-DMA 控制器及三帧缓存架构的 PSRAM 控制器。</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <h5 class="text-lg font-bold text-gray-800 mb-4 border-b border-gray-50 pb-2">EDA 与验证</h5>
+                            <ul>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-slate-600"></span><span>精通 Xilinx (Vivado/ISE), 安陆 (TD), 紫光等国产化 FPGA 平台的开发编译流。</span></li>
+                                <li class="flex items-start text-gray-600 text-sm leading-relaxed mb-2"><span class="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-slate-600"></span><span>熟练使用 Modelsim 进行时序仿真与调试，掌握基于 HLS 的 C-to-RTL 高级综合开发。</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // --- 交互逻辑 ---
+        const cards = document.querySelectorAll('.tech-card');
+        const modal = document.getElementById('infoModal');
+        const modalContent = document.getElementById('modalContent');
+        const modalHeader = document.getElementById('modalHeader');
+        const modalIcon = document.getElementById('modalIcon');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        function openModal(targetKey) {
+            const data = contentData[targetKey];
+            if (!data) return;
+
+            // 动态设置主题与头部
+            modalHeader.className = `px-8 py-6 border-b border-gray-100 flex justify-between items-center text-white flex-shrink-0 ${data.themeClass || 'bg-indigo-600'}`;
+            modalTitle.innerText = data.title;
+            if(data.icon) modalIcon.innerHTML = data.icon;
+            
+            // 注入定制数据
+            modalBody.innerHTML = data.html;
+
+            // 打开弹窗动画
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-95', 'opacity-0');
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.add('scale-95', 'opacity-0');
+        }
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const target = card.getAttribute('data-target');
+                openModal(target);
+            });
+        });
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    </script>
 </body>
-<script>
-var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'search': 'M15.7 13.3l-3.81-3.83A5.93 5.93 0 0 0 13 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 0 0 0-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z', 'rss': 'M2.002 2.725a.75.75 0 0 1 .797-.699C8.79 2.42 13.58 7.21 13.974 13.201a.75.75 0 0 1-1.497.098 10.502 10.502 0 0 0-9.776-9.776.747.747 0 0 1-.7-.798ZM2.84 7.05h-.002a7.002 7.002 0 0 1 6.113 6.111.75.75 0 0 1-1.49.178 5.503 5.503 0 0 0-4.8-4.8.75.75 0 0 1 .179-1.489ZM2 13a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z', 'upload': 'M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z M11.78 4.72a.749.749 0 1 1-1.06 1.06L8.75 3.811V9.5a.75.75 0 0 1-1.5 0V3.811L5.28 5.78a.749.749 0 1 1-1.06-1.06l3.25-3.25a.749.749 0 0 1 1.06 0l3.25 3.25Z', 'post': 'M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25ZM3.5 6.25a.75.75 0 0 1 .75-.75h7a.75.75 0 0 1 0 1.5h-7a.75.75 0 0 1-.75-.75Zm.75 2.25h4a.75.75 0 0 1 0 1.5h-4a.75.75 0 0 1 0-1.5Z', 'about': 'M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z', 'portfolio': None};
-var utterancesLoad=0;
-
-let themeSettings={
-    "dark": ["dark","moon","#00f0ff","dark-blue"],
-    "light": ["light","sun","#ff5000","github-light"],
-    "auto": ["auto","sync","","preferred-color-scheme"]
-};
-function changeTheme(mode, icon, color, utheme){
-    document.documentElement.setAttribute("data-color-mode",mode);
-    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
-    document.getElementById("themeSwitch").parentNode.style.color=color;
-    if(utterancesLoad==1){utterancesTheme(utheme);}
-}
-function modeSwitch(){
-    let currentMode=document.documentElement.getAttribute('data-color-mode');
-    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
-    localStorage.setItem("meek_theme", newMode);
-    if(themeSettings[newMode]){
-        changeTheme(...themeSettings[newMode]);
-    }
-}
-function utterancesTheme(theme){
-    const message={type:'set-theme',theme: theme};
-    const iframe=document.getElementsByClassName('utterances-frame')[0];
-    iframe.contentWindow.postMessage(message,'https://utteranc.es');
-}
-if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
-console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
-</script>
-
-<script>
-document.getElementById("pathSearch").setAttribute("d",IconList["search"]);
-document.getElementById("pathRSS").setAttribute("d",IconList["rss"]);
-iconTOP=document.getElementsByClassName("svgTop1");
-iconPost=document.getElementsByClassName("svgTop0");
-for(var i=0;i<iconTOP.length;i++){
-    iconTOP[i].setAttribute("d",IconList["upload"]);
-    iconTOP[i].parentNode.style.color="red";
-}
-for(var i=0;i<iconPost.length;i++){
-    iconPost[i].setAttribute("d",IconList["post"]);
-}
-
-
-document.getElementById("GitHub").setAttribute("d",value=IconList["GitHub"]);
-
-
-</script>
-
-
 </html>
