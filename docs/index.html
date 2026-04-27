@@ -3,141 +3,428 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的主页 - 机器人与底层系统工程师</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>个人简历 | 机器人与FPGA全栈研发</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .bg-grid {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+        :root {
+            --bg-base: #030712;
+            --bg-surface: #111827;
+            --border-line: #1f2937;
+            --accent-primary: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+            --text-heading: #f9fafb;
+            --text-body: #9ca3af;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Consolas, monospace;
         }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .code-block {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: #1e293b;
-            color: #e2e8f0;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
-            line-height: 1.5;
-            overflow-x: auto;
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-body);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
+
+        nav {
+            position: fixed;
+            top: 0; width: 100%; height: 70px;
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid transparent;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        nav.scrolled {
+            border-bottom: 1px solid var(--border-line);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            background: rgba(3, 7, 18, 0.95);
+        }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a {
+            color: var(--text-heading);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-family: var(--font-mono);
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent-primary); }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header { margin: 100px 0 50px 0; }
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--text-heading);
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+        }
+        .section-title::after {
+            content: ""; flex-grow: 1; height: 1px;
+            background: var(--border-line); margin-left: 20px;
+        }
+        .section-title span { color: var(--accent-primary); font-family: var(--font-mono); margin-right: 15px; font-size: 1.4rem; }
+
+        #home {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 70px;
+        }
+        .hero-pre { font-family: var(--font-mono); color: var(--accent-primary); margin-bottom: 20px; letter-spacing: 1px; }
+        .hero-title { font-size: clamp(3rem, 6vw, 4.5rem); color: var(--text-heading); font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+        .hero-subtitle { font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--text-body); font-weight: 600; margin-bottom: 30px; height: 3rem; }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background-color: var(--accent-primary);
+            vertical-align: text-bottom;
+            animation: blink 0.8s infinite;
+            margin-left: 5px;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .hero-desc { max-width: 650px; font-size: 1.1rem; margin-bottom: 40px; }
+        .hero-actions { display: flex; gap: 20px; }
+        .btn {
+            padding: 14px 28px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.9rem;
+            text-decoration: none; transition: all 0.3s;
+        }
+        .btn-primary { background: transparent; border: 1px solid var(--accent-primary); color: var(--accent-primary); }
+        .btn-primary:hover { background: var(--accent-glow); }
+
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .skill-group {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-line);
+            border-radius: 8px;
+            padding: 30px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .skill-group:hover { transform: translateY(-5px); border-color: #374151; }
+        .skill-group h3 { font-size: 1.1rem; color: var(--text-heading); margin-bottom: 20px; font-family: var(--font-mono); }
+        .skill-list { list-style: none; }
+        .skill-list li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; font-size: 0.95rem; }
+        .skill-list li::before { content: "▹"; color: var(--accent-primary); font-weight: bold; }
+
+        .project-list { display: flex; flex-direction: column; gap: 40px; }
+        .project-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-line);
+            border-radius: 8px;
+            padding: 35px;
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+        .project-card:hover { box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5); }
+        .project-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--accent-primary); opacity: 0; transition: opacity 0.3s;
+        }
+        .project-card:hover::before { opacity: 1; }
+
+        .project-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+        .project-name { font-size: 1.4rem; font-weight: 700; color: var(--text-heading); }
+        .project-time { font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent-primary); }
+
+        .project-desc { font-size: 0.95rem; }
+        .project-desc .context { margin-bottom: 20px; color: #d1d5db; }
+        .sub-title { color: var(--text-heading); font-weight: 600; margin: 15px 0 10px; font-size: 1rem; }
+        .project-desc ul { padding-left: 20px; list-style-type: none; }
+        .project-desc li { margin-bottom: 10px; position: relative; }
+        .project-desc li::before { content: "·"; position: absolute; left: -15px; color: var(--accent-primary); font-weight: bold; font-size: 1.2rem; line-height: 1; }
+
+        .highlight-metrics {
+            margin-top: 25px; background: rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 4px;
+            padding: 15px; font-size: 0.9rem; color: #d1d5db;
+        }
+        .highlight-metrics strong { font-family: var(--font-mono); font-weight: normal; color: var(--accent-primary); }
+
+        footer { text-align: center; padding: 50px; color: var(--text-body); font-family: var(--font-mono); font-size: 0.85rem; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 bg-grid min-h-screen relative">
+<body>
 
-    <nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center relative z-10">
-        <div class="text-2xl font-extrabold tracking-tighter text-gray-900">Dev<span class="text-indigo-600">Profile.</span></div>
-        <div class="space-x-6 text-sm font-semibold hidden md:block">
-            <a href="#about" class="hover:text-indigo-600 transition">关于我</a>
-            <a href="#stack" class="hover:text-indigo-600 transition">技能矩阵</a>
-            <a href="#projects" class="hover:text-indigo-600 transition">精选项目</a>
-        </div>
+    <nav id="navbar">
+        <ul class="nav-links">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#skills">核心技能</a></li>
+            <li><a href="#robotics">机器人工程</a></li>
+            <li><a href="#fpga">硬件与FPGA</a></li>
+        </ul>
     </nav>
 
-    <header id="about" class="max-w-4xl mx-auto px-6 pt-12 pb-20 flex flex-col items-center text-center relative z-10">
-        <div class="w-32 h-32 rounded-full bg-gradient-to-tr from-indigo-500 to-cyan-400 p-1 mb-8 shadow-lg hover:scale-105 transition-transform duration-300">
-            <div class="w-full h-full bg-white rounded-full border-4 border-white flex items-center justify-center overflow-hidden">
-                <span class="text-3xl font-bold text-gray-300">HW/SW</span>
+    <div class="container">
+        <section id="home" class="fade-in">
+            <p class="hero-pre">Hi, 欢迎来到我的在线简历</p>
+            <h1 class="hero-title">[你的姓名]</h1>
+            <h2 class="hero-subtitle">
+                <span id="typewriter-text"></span><span class="cursor"></span>
+            </h2>
+            <p class="hero-desc">
+                专注于具身智能（Embodied AI）系统的全栈开发。具备从 FPGA 硬件逻辑加速、底层设备驱动开发，到顶层 ROS/ROS2 导航规划算法落地的完整工程闭环能力。致力于在算力受限的物理平台上实现高性能的自主交互系统。
+            </p>
+            <div class="hero-actions">
+                <a href="#robotics" class="btn btn-primary">查看工程实践</a>
+                <a href="#fpga" class="btn btn-primary" style="border-color: var(--border-line); color: var(--text-heading);">底层硬件架构</a>
             </div>
-        </div>
+        </section>
 
-        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 mb-4">
-            你好，我是 <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-500">[你的名字]</span>
-        </h1>
-        <h2 class="text-xl md:text-2xl font-semibold text-gray-600 mb-8">
-            机器人系统与底层架构工程师
-        </h2>
-        <p class="text-lg text-gray-500 max-w-2xl leading-relaxed">
-            致力于打通从底层硅核到具身智能的全链路工程。拥有 8500+ 行复杂 C++ 系统的独立开发经验。精通四足机器人的感知、规划与高频运控，并具备扎实的 FPGA 硬件加速与 Linux 驱动底层架构能力。
-        </p>
-    </header>
-
-    <section id="stack" class="max-w-6xl mx-auto px-6 py-10 relative z-10">
-        <div class="flex flex-col items-center mb-16">
-            <h3 class="text-3xl font-extrabold text-gray-900 mb-4">技术栈与核心竞争力</h3>
-            <div class="h-1 w-20 bg-indigo-600 rounded-full"></div>
-            <p class="mt-4 text-gray-500 text-sm">点击各个模块查看底层技术细节</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="tech-card group bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:border-emerald-500 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer relative flex flex-col justify-between" data-target="robotics">
-                <div>
-                    <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A2 2 0 013 15.488V5.488a2 2 0 011.553-1.954L9 2l5.447 2.724A2 2 0 0116 6.678v9.81a2 2 0 01-1.553 1.954L9 20z"></path></svg>
-                    </div>
-                    <h4 class="text-xl font-bold text-gray-800 mb-4 group-hover:text-emerald-600 transition-colors">全栈导航与算法设计</h4>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-6">
-                        独立开发 8500 行规模的四足导航系统。精通 8 种图搜索与采样规划算法，具备强化学习训练经验与自研规划算法落地能力。
-                    </p>
+        <section id="skills">
+            <div class="section-header fade-in">
+                <h2 class="section-title"><span>01.</span>核心技术栈</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-group fade-in" style="transition-delay: 0.1s;">
+                    <h3>[ 算法与机器人中间件 ]</h3>
+                    <ul class="skill-list">
+                        <li>精通 ROS 1/2 机器人中间件架构，具备节点开发与系统总成能力。</li>
+                        <li>熟练应用 SLAM 建图框架（Faster-LIO）与 3D 点云处理（PCL/OpenCV）。</li>
+                        <li>精通全局与局部路径规划算法（A*、Theta*、JPS、RRT 系列及自研碰撞点采样算法）。</li>
+                        <li>掌握机器人底层运动学解析与多线程状态机开发。</li>
+                    </ul>
+                </div>
+                <div class="skill-group fade-in" style="transition-delay: 0.2s;">
+                    <h3>[ FPGA 与硬件逻辑架构 ]</h3>
+                    <ul class="skill-list">
+                        <li>熟练应用 Verilog HDL，具备复杂的数字逻辑架构设计与时序优化能力。</li>
+                        <li>精通高速接口协议栈开发（PCIe EP 控制器、MIPI CSI-2、NVMe）。</li>
+                        <li>精通 AXI4 系列总线架构（AXI4-Lite/DMA），具备高并发数据缓存与仲裁机制设计经验。</li>
+                        <li>熟悉基于 HLS 的硬件级算法加速（SIFT 特征提取、图像预处理）。</li>
+                    </ul>
+                </div>
+                <div class="skill-group fade-in" style="transition-delay: 0.3s;">
+                    <h3>[ 软件开发与全栈工具 ]</h3>
+                    <ul class="skill-list">
+                        <li>精通 C/C++ 开发，具备 Linux 底层驱动编写与上位机（QT/MFC）开发能力。</li>
+                        <li>熟练开发常见微控制器及外设通信（STM32、ESP8266、NMEA 协议解析）。</li>
+                        <li>具备工业自动化控制经验（PLC 梯形图编程与联调）。</li>
+                        <li>熟练应用 Flutter 跨平台框架构建移动端控制总成（集成 SSH/Rosbridge 通信）。</li>
+                    </ul>
                 </div>
             </div>
+        </section>
 
-            <div class="tech-card group bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:border-indigo-500 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer relative flex flex-col justify-between" data-target="software">
-                <div>
-                    <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                    </div>
-                    <h4 class="text-xl font-bold text-gray-800 mb-4 group-hover:text-indigo-600 transition-colors">高并发与 C++ 系统工程</h4>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-6">
-                        极致的工程架构能力。熟练运用 std::atomic / std::mutex 构建线程安全的 ROS2 节点，精通状态机 (FSM) 设计与底层驱动开发。
-                    </p>
-                </div>
+        <section id="robotics">
+            <div class="section-header fade-in">
+                <h2 class="section-title"><span>02.</span>机器人工程实践</h2>
             </div>
-
-            <div class="tech-card group bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:border-slate-800 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer relative flex flex-col justify-between" data-target="hardware">
-                <div>
-                    <div class="w-14 h-14 bg-slate-100 text-slate-800 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-slate-800 group-hover:text-white transition-all duration-300">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+            <div class="project-list">
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-name">基于宇树 Unitree Go2 的四足机器人自主导航系统</div>
+                        <div class="project-time">2025.10 - 2026.12</div>
                     </div>
-                    <h4 class="text-xl font-bold text-gray-800 mb-4 group-hover:text-slate-800 transition-colors">FPGA 与底层通信协议</h4>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-6">
-                        跨界硬件能力。精通 HDL，熟练实现 PCIe/NVMe 初始化与协议栈，具备复杂视觉算法 (SIFT) 的 RTL 级硬件加速部署经验。
-                    </p>
+                    <div class="project-desc">
+                        <p class="context">基于 Lightning-LM SLAM 框架，重构并实现四足机器人的全局导航与运动控制总成，涵盖感知处理、路径规划、运动控制及前端交互四大模块。</p>
+
+                        <div class="sub-title">核心贡献：</div>
+                        <ul>
+                            <li><strong>SLAM算法优化：</strong>改进 Faster-LIO 建图逻辑，提出在 ICP 点面匹配前介入 XY 与 Z 轴预匹配策略，显著收敛 Z 轴累计漂移。</li>
+                            <li><strong>异构规划器集成：</strong>统筹图搜索（A*、JPS）、随机采样（RRT 系列）及自研 RRCT 算法。引入拐角检测与平滑优化，使复杂地形下的规划效率提升 35%。</li>
+                            <li><strong>控制中枢开发：</strong>设计多线程并发控制器，接管 12-DOF 电机状态机。封装 4 类控制域（距离/角度/位置/导航）与 20+ 动作原语，维持高频里程计广播。</li>
+                            <li><strong>环境感知流：</strong>搭建 PCL+OpenCV 处理管线，实现 3D 点云至 2D 栅格的降维投影，结合动态障碍物检测完成像素空间至 3D 物理坐标的双向精准映射。</li>
+                            <li><strong>协议与交互部署：</strong>深度解耦 Unitree SDK，重构 JSON 序列化协议与 TF 树管理机制；独立开发基于 Flutter 的移动端终控 APP，利用 SSH 与 ros2bridge 闭环远程遥测链路。</li>
+                        </ul>
+
+                        <div class="highlight-metrics">
+                            <strong>系统指标：</strong> 复杂环境建图与规划成功率 >95% | 平均路径解算耗时 <100ms | 传感器至执行器全链路延迟 <200ms（已在校园及地下车库等非结构化实景中完成实机验证）。
+                        </div>
+                    </div>
                 </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-name">基于宇树 B1 四足机器人的核安保巡检系统</div>
+                        <div class="project-time">2025.06 - 2025.12</div>
+                    </div>
+                    <div class="project-desc">
+                        <p class="context">面向核电站高危环境，主导开发集远程测控、多源传感器同步采集及自主航迹规划于一体的特种机器人巡检平台。</p>
+
+                        <div class="sub-title">核心贡献：</div>
+                        <ul>
+                            <li><strong>异地通信总线：</strong>主导底层无线链路开发，基于 ESP8266 固件编写实现高可靠性的指令透传与图传数据流推送。</li>
+                            <li><strong>定制化 RVIZ 平台：</strong>基于 QT 框架开发地面站测控软件，集成航点指派、代价地图渲染、地图拓扑编辑及点云/机体模型实时可视化功能。</li>
+                            <li><strong>多传感器时钟同步：</strong>主导硬件同步板与 GPS 传感器的时序调优，实现 IMU、视觉传感器与 GPS 数据的严格对齐；编写 NMEA（GPGGA/GPRMC）解析栈并接入 ROS 通信网段。</li>
+                            <li><strong>自研规划算法落地：</strong>参与实验室自研“基于碰撞点采样算法”的核心逻辑开发与代码重构，完成边界生成与航线平滑。</li>
+                        </ul>
+
+                        <div class="highlight-metrics">
+                            <strong>系统指标：</strong> 非结构化高噪环境规划成功率 >90% | 平均规划耗时 <100ms（收敛速度与平滑度均优于标杆 A* 与传统 RRT 算法）。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-name">中广核智能起重机控制系统</div>
+                        <div class="project-time">2025.09 - 2025.12</div>
+                    </div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>参与工业级 PLC 梯形图逻辑编程与联调，保障重型行车在多工况（自动/手操）下的目标容器安全抓取与高精度放置。</li>
+                            <li>独立开发基于 MFC 的上位机总控平台，构建设备与操作员间的低延迟指令通道，实现起重抓具的全自动化作业编排。</li>
+                            <li>协同开发机器视觉定位模块，设计容器盖板特征提取与圆心拟合算法，引导执行机构完成亚毫米级精准抓取。</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="projects" class="max-w-6xl mx-auto px-6 py-20 relative z-10">
-        <div class="flex flex-col items-center mb-16">
-            <h3 class="text-3xl font-extrabold text-gray-900 mb-4">精选工程项目</h3>
-            <p class="text-gray-500">具备强工业落地价值的复杂系统开发实录</p>
-        </div>
-
-        <div class="space-y-12">
-            <div class="tech-card relative group bg-white rounded-3xl border border-gray-100 overflow-hidden flex flex-col lg:flex-row shadow-sm hover:shadow-2xl transition-all duration-500">
-                <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-500 to-teal-400"></div>
-                <div class="lg:w-1/3 bg-slate-900 flex flex-col items-center justify-center p-8 overflow-hidden relative">
-                    <div class="relative z-10 text-center mb-6">
-                        <div class="text-emerald-400 text-xs font-mono mb-2 uppercase tracking-widest">8500 Lines of C++</div>
-                        <div class="text-white text-xl font-bold italic tracking-tighter">UNITREE GO2 NAV</div>
-                    </div>
-                </div>
-                <div class="lg:w-2/3 p-10 flex flex-col justify-between">
-                    <div>
-                        <h4 class="text-2xl font-bold text-gray-900 mb-4">宇树 Go2 四足机器人全栈自主导航系统</h4>
-                        <p class="text-gray-600 leading-relaxed text-sm mb-6">
-                            基于 Lightning-LM SLAM 框架，独立设计并实现了四足机器人的感知、全局导航与运动控制三大模块。项目规模达 8500+ 行，规划成功率超 95%，已通过真机极限场景验证。
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-lg uppercase tracking-wider">C++ 17</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-lg uppercase tracking-wider">ROS2 / FSM</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-lg uppercase tracking-wider">PCL / OpenCV</span>
-                    </div>
-                </div>
+        <section id="fpga">
+            <div class="section-header fade-in">
+                <h2 class="section-title"><span>03.</span>底层硬件与 FPGA 架构</h2>
             </div>
-        </div>
-    </section>
+            <div class="project-list">
 
-    <footer class="border-t border-gray-200 bg-white py-10 mt-10 text-center text-gray-500 text-sm relative z-10">
-        <p class="font-semibold text-gray-800 mb-2">Build with Engineering Aesthetics</p>
-        <p>&copy; 2026. All Rights Reserved.</p>
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-name">FPGA 岗位核心研发职责</div>
+                        <div class="project-time">研发工程师</div>
+                    </div>
+                    <div class="project-desc">
+                        <ul>
+                            <li><strong>DT2300 测控项目：</strong>部署 AD7606 完成 8 通道并行数据采集；基于 HLS 技术栈实现特征值高速运算协处理器；重构 AXI4-DMA 与 AXI4-Lite 总线拓扑，打通 PL 侧与 PS 侧的高吞吐数据交互，并主笔系统级设计规范。</li>
+                            <li><strong>存储控制器设计：</strong>基于安陆 SF1 系列 FPGA，独立设计带有硬件仲裁机制的三帧缓存 PSRAM 控制器，确保多通道并发读写时序的安全与高效。</li>
+                            <li><strong>系统级维护：</strong>接手并优化 DW1900S 遗留项目代码基线，熟练使用 ISE 工具链进行时序收敛与程序固化。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-name">基于 NVMe 协议的视频高速存储与回放系统</div>
+                        <div class="project-time">2025.09 - 2026.03</div>
+                    </div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>深度定制 PCIe EP 控制器（基于 XDMA），独立完成 Type0 配置空间初始化与 BAR 地址映射，建立 NVMe 设备的底层物理链接。</li>
+                            <li>从零构建轻量级 NVMe 协议栈，封装 Admin 与 I/O 队列的读写调度机制，实现复杂命令包的精确封包与解包逻辑。</li>
+                            <li>设计基于公平仲裁策略的多通道 AXI4-DMA 调度器，管理流媒体数据包的双向路由，实现海量视频流的无掉帧存储与高实时回放。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-name">基于 FPGA 的图像 SIFT 特征提取与硬件加速验证</div>
+                        <div class="project-time">2024.10 - 2025.05</div>
+                    </div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>主导图像处理流水线硬件加速，完成基于 SIFT 的特征提取与图像拼接算子设计（涵盖 Harris 角点检测、CORDIC 极坐标解算、LFSR 随机数注入、高斯消元阵列、单应性矩阵变换及像素级加权融合）。</li>
+                            <li>架构设计支持任意 burst 长度与多通道并行的 AXI4-DMA 内存管理器，突破数据搬运瓶颈，实现跨模块数据的分区隔离与高效转运。</li>
+                            <li>搭建基于 XDMA 的全双工高速物理总线，打通异构计算平台（FPGA-PC）数据链路，并编写桌面端程序完成描述子匹配的可视化验证。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-name">基于 FPGA 的多功能实时图像处理平台 (本科毕设)</div>
+                        <div class="project-time">2023.12 - 2024.04</div>
+                    </div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>攻克 MIPI CSI-2 物理层协议，完成 OV5640 传感器驱动开发与时序校准。硬化多项图像处理核心算法（仿射变换、空域滤波、边缘检测与动态融合）。</li>
+                            <li>创新性设计分奇偶 Bank 寻址的三帧缓存 AXI-DMA 控制架构，彻底消除视频流拼接过程中的画面撕裂与显存读写冲突。</li>
+                            <li>开发基于串口通信的指令集系统与上位机终端，实现 FPGA 算子流水线的动态重配与多显示模式的热切换。</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Resume © 2026</p>
     </footer>
 
+    <script>
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        const textArray = ["机器人算法工程师", "FPGA与底层硬件开发者", "全栈具身智能研发者"];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeTarget = document.getElementById("typewriter-text");
+
+        function type() {
+            const currentText = textArray[textIndex];
+
+            if (isDeleting) {
+                typeTarget.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeTarget.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = 100;
+            if (isDeleting) typeSpeed /= 2;
+
+            if (!isDeleting && charIndex === currentText.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % textArray.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(type, 1000);
+        });
+    </script>
 </body>
 </html>
