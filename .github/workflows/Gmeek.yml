@@ -24,6 +24,7 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Get config.json
+        if: ${{ github.event_name != 'push' }}
         run: |
           echo "====== check config.josn file ======"
           cat config.json
@@ -31,11 +32,13 @@ jobs:
           sudo apt-get install jq
 
       - name: Set up Python
+        if: ${{ github.event_name != 'push' }}
         uses: actions/setup-python@v5
         with:
           python-version: 3.8
 
       - name: Clone source code
+        if: ${{ github.event_name != 'push' }}
         run: |
           GMEEK_VERSION=$(jq -r ".GMEEK_VERSION" config.json)
           git clone https://github.com/Meekdai/Gmeek.git /opt/Gmeek;
@@ -44,11 +47,13 @@ jobs:
           if [ $GMEEK_VERSION == 'last' ]; then git checkout $lastTag; else git checkout $GMEEK_VERSION; fi;
 
       - name: Install dependencies
+        if: ${{ github.event_name != 'push' }}
         run: |
           pip install --upgrade pip
           pip install -r /opt/Gmeek/requirements.txt
 
       - name: Generate new html
+        if: ${{ github.event_name != 'push' }}
         run: |
           cp -r ./* /opt/Gmeek/
           cd /opt/Gmeek/
@@ -58,6 +63,7 @@ jobs:
           cp /opt/Gmeek/blogBase.json ${{ github.workspace }} 
           
       - name: update html
+        if: ${{ github.event_name != 'push' }}
         run: |
           git config --local user.email "$(jq -r ".email" config.json)"
           git config --local user.name "${{ github.repository_owner }}"
