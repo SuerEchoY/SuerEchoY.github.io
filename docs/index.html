@@ -1,430 +1,159 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html data-color-mode="light" data-dark-theme="dark_dimmed" data-light-theme="dark_dimmed" lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人简历 | 机器人与FPGA全栈研发</title>
-    <style>
-        :root {
-            --bg-base: #030712;
-            --bg-surface: #111827;
-            --border-line: #1f2937;
-            --accent-primary: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.15);
-            --text-heading: #f9fafb;
-            --text-body: #9ca3af;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Consolas, monospace;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--bg-base);
-            color: var(--text-body);
-            font-family: var(--font-sans);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        nav {
-            position: fixed;
-            top: 0; width: 100%; height: 70px;
-            background: rgba(3, 7, 18, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid transparent;
-            display: flex; justify-content: center; align-items: center;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-        nav.scrolled {
-            border-bottom: 1px solid var(--border-line);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-            background: rgba(3, 7, 18, 0.95);
-        }
-        .nav-links { display: flex; gap: 40px; list-style: none; }
-        .nav-links a {
-            color: var(--text-heading);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-family: var(--font-mono);
-            transition: color 0.3s;
-        }
-        .nav-links a:hover { color: var(--accent-primary); }
-
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-header { margin: 100px 0 50px 0; }
-        .section-title {
-            font-size: 1.8rem;
-            color: var(--text-heading);
-            display: flex;
-            align-items: center;
-            font-weight: 700;
-        }
-        .section-title::after {
-            content: ""; flex-grow: 1; height: 1px;
-            background: var(--border-line); margin-left: 20px;
-        }
-        .section-title span { color: var(--accent-primary); font-family: var(--font-mono); margin-right: 15px; font-size: 1.4rem; }
-
-        #home {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-top: 70px;
-        }
-        .hero-pre { font-family: var(--font-mono); color: var(--accent-primary); margin-bottom: 20px; letter-spacing: 1px; }
-        .hero-title { font-size: clamp(3rem, 6vw, 4.5rem); color: var(--text-heading); font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
-        .hero-subtitle { font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--text-body); font-weight: 600; margin-bottom: 30px; height: 3rem; }
-
-        .cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1em;
-            background-color: var(--accent-primary);
-            vertical-align: text-bottom;
-            animation: blink 0.8s infinite;
-            margin-left: 5px;
-        }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-        .hero-desc { max-width: 650px; font-size: 1.1rem; margin-bottom: 40px; }
-        .hero-actions { display: flex; gap: 20px; }
-        .btn {
-            padding: 14px 28px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.9rem;
-            text-decoration: none; transition: all 0.3s;
-        }
-        .btn-primary { background: transparent; border: 1px solid var(--accent-primary); color: var(--accent-primary); }
-        .btn-primary:hover { background: var(--accent-glow); }
-
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
-        .skill-group {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-line);
-            border-radius: 8px;
-            padding: 30px;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-        .skill-group:hover { transform: translateY(-5px); border-color: #374151; }
-        .skill-group h3 { font-size: 1.1rem; color: var(--text-heading); margin-bottom: 20px; font-family: var(--font-mono); }
-        .skill-list { list-style: none; }
-        .skill-list li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; font-size: 0.95rem; }
-        .skill-list li::before { content: "▹"; color: var(--accent-primary); font-weight: bold; }
-
-        .project-list { display: flex; flex-direction: column; gap: 40px; }
-        .project-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-line);
-            border-radius: 8px;
-            padding: 35px;
-            position: relative;
-            overflow: hidden;
-            transition: box-shadow 0.3s;
-        }
-        .project-card:hover { box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5); }
-        .project-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-            background: var(--accent-primary); opacity: 0; transition: opacity 0.3s;
-        }
-        .project-card:hover::before { opacity: 1; }
-
-        .project-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
-        .project-name { font-size: 1.4rem; font-weight: 700; color: var(--text-heading); }
-        .project-time { font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent-primary); }
-
-        .project-desc { font-size: 0.95rem; }
-        .project-desc .context { margin-bottom: 20px; color: #d1d5db; }
-        .sub-title { color: var(--text-heading); font-weight: 600; margin: 15px 0 10px; font-size: 1rem; }
-        .project-desc ul { padding-left: 20px; list-style-type: none; }
-        .project-desc li { margin-bottom: 10px; position: relative; }
-        .project-desc li::before { content: "·"; position: absolute; left: -15px; color: var(--accent-primary); font-weight: bold; font-size: 1.2rem; line-height: 1; }
-
-        .highlight-metrics {
-            margin-top: 25px; background: rgba(59, 130, 246, 0.05);
-            border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 4px;
-            padding: 15px; font-size: 0.9rem; color: #d1d5db;
-        }
-        .highlight-metrics strong { font-family: var(--font-mono); font-weight: normal; color: var(--accent-primary); }
-
-        footer { text-align: center; padding: 50px; color: var(--text-body); font-family: var(--font-mono); font-size: 0.85rem; }
-    </style>
-</head>
-<body>
-
-    <nav id="navbar">
-        <ul class="nav-links">
-            <li><a href="#home">首页</a></li>
-            <li><a href="#skills">核心技能</a></li>
-            <li><a href="#robotics">机器人工程</a></li>
-            <li><a href="#fpga">硬件与FPGA</a></li>
-        </ul>
-    </nav>
-
-    <div class="container">
-        <section id="home" class="fade-in">
-            <p class="hero-pre">Hi, 欢迎来到我的在线简历</p>
-            <h1 class="hero-title">[你的姓名]</h1>
-            <h2 class="hero-subtitle">
-                <span id="typewriter-text"></span><span class="cursor"></span>
-            </h2>
-            <p class="hero-desc">
-                专注于具身智能（Embodied AI）系统的全栈开发。具备从 FPGA 硬件逻辑加速、底层设备驱动开发，到顶层 ROS/ROS2 导航规划算法落地的完整工程闭环能力。致力于在算力受限的物理平台上实现高性能的自主交互系统。
-            </p>
-            <div class="hero-actions">
-                <a href="#robotics" class="btn btn-primary">查看工程实践</a>
-                <a href="#fpga" class="btn btn-primary" style="border-color: var(--border-line); color: var(--text-heading);">底层硬件架构</a>
-            </div>
-        </section>
-
-        <section id="skills">
-            <div class="section-header fade-in">
-                <h2 class="section-title"><span>01.</span>核心技术栈</h2>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-group fade-in" style="transition-delay: 0.1s;">
-                    <h3>[ 算法与机器人中间件 ]</h3>
-                    <ul class="skill-list">
-                        <li>精通 ROS 1/2 机器人中间件架构，具备节点开发与系统总成能力。</li>
-                        <li>熟练应用 SLAM 建图框架（Faster-LIO）与 3D 点云处理（PCL/OpenCV）。</li>
-                        <li>精通全局与局部路径规划算法（A*、Theta*、JPS、RRT 系列及自研碰撞点采样算法）。</li>
-                        <li>掌握机器人底层运动学解析与多线程状态机开发。</li>
-                    </ul>
-                </div>
-                <div class="skill-group fade-in" style="transition-delay: 0.2s;">
-                    <h3>[ FPGA 与硬件逻辑架构 ]</h3>
-                    <ul class="skill-list">
-                        <li>熟练应用 Verilog HDL，具备复杂的数字逻辑架构设计与时序优化能力。</li>
-                        <li>精通高速接口协议栈开发（PCIe EP 控制器、MIPI CSI-2、NVMe）。</li>
-                        <li>精通 AXI4 系列总线架构（AXI4-Lite/DMA），具备高并发数据缓存与仲裁机制设计经验。</li>
-                        <li>熟悉基于 HLS 的硬件级算法加速（SIFT 特征提取、图像预处理）。</li>
-                    </ul>
-                </div>
-                <div class="skill-group fade-in" style="transition-delay: 0.3s;">
-                    <h3>[ 软件开发与全栈工具 ]</h3>
-                    <ul class="skill-list">
-                        <li>精通 C/C++ 开发，具备 Linux 底层驱动编写与上位机（QT/MFC）开发能力。</li>
-                        <li>熟练开发常见微控制器及外设通信（STM32、ESP8266、NMEA 协议解析）。</li>
-                        <li>具备工业自动化控制经验（PLC 梯形图编程与联调）。</li>
-                        <li>熟练应用 Flutter 跨平台框架构建移动端控制总成（集成 SSH/Rosbridge 通信）。</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="robotics">
-            <div class="section-header fade-in">
-                <h2 class="section-title"><span>02.</span>机器人工程实践</h2>
-            </div>
-            <div class="project-list">
-                <div class="project-card fade-in">
-                    <div class="project-header">
-                        <div class="project-name">基于宇树 Unitree Go2 的四足机器人自主导航系统</div>
-                        <div class="project-time">2025.10 - 2026.12</div>
-                    </div>
-                    <div class="project-desc">
-                        <p class="context">基于 Lightning-LM SLAM 框架，重构并实现四足机器人的全局导航与运动控制总成，涵盖感知处理、路径规划、运动控制及前端交互四大模块。</p>
-
-                        <div class="sub-title">核心贡献：</div>
-                        <ul>
-                            <li><strong>SLAM算法优化：</strong>改进 Faster-LIO 建图逻辑，提出在 ICP 点面匹配前介入 XY 与 Z 轴预匹配策略，显著收敛 Z 轴累计漂移。</li>
-                            <li><strong>异构规划器集成：</strong>统筹图搜索（A*、JPS）、随机采样（RRT 系列）及自研 RRCT 算法。引入拐角检测与平滑优化，使复杂地形下的规划效率提升 35%。</li>
-                            <li><strong>控制中枢开发：</strong>设计多线程并发控制器，接管 12-DOF 电机状态机。封装 4 类控制域（距离/角度/位置/导航）与 20+ 动作原语，维持高频里程计广播。</li>
-                            <li><strong>环境感知流：</strong>搭建 PCL+OpenCV 处理管线，实现 3D 点云至 2D 栅格的降维投影，结合动态障碍物检测完成像素空间至 3D 物理坐标的双向精准映射。</li>
-                            <li><strong>协议与交互部署：</strong>深度解耦 Unitree SDK，重构 JSON 序列化协议与 TF 树管理机制；独立开发基于 Flutter 的移动端终控 APP，利用 SSH 与 ros2bridge 闭环远程遥测链路。</li>
-                        </ul>
-
-                        <div class="highlight-metrics">
-                            <strong>系统指标：</strong> 复杂环境建图与规划成功率 >95% | 平均路径解算耗时 <100ms | 传感器至执行器全链路延迟 <200ms（已在校园及地下车库等非结构化实景中完成实机验证）。
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-header">
-                        <div class="project-name">基于宇树 B1 四足机器人的核安保巡检系统</div>
-                        <div class="project-time">2025.06 - 2025.12</div>
-                    </div>
-                    <div class="project-desc">
-                        <p class="context">面向核电站高危环境，主导开发集远程测控、多源传感器同步采集及自主航迹规划于一体的特种机器人巡检平台。</p>
-
-                        <div class="sub-title">核心贡献：</div>
-                        <ul>
-                            <li><strong>异地通信总线：</strong>主导底层无线链路开发，基于 ESP8266 固件编写实现高可靠性的指令透传与图传数据流推送。</li>
-                            <li><strong>定制化 RVIZ 平台：</strong>基于 QT 框架开发地面站测控软件，集成航点指派、代价地图渲染、地图拓扑编辑及点云/机体模型实时可视化功能。</li>
-                            <li><strong>多传感器时钟同步：</strong>主导硬件同步板与 GPS 传感器的时序调优，实现 IMU、视觉传感器与 GPS 数据的严格对齐；编写 NMEA（GPGGA/GPRMC）解析栈并接入 ROS 通信网段。</li>
-                            <li><strong>自研规划算法落地：</strong>参与实验室自研“基于碰撞点采样算法”的核心逻辑开发与代码重构，完成边界生成与航线平滑。</li>
-                        </ul>
-
-                        <div class="highlight-metrics">
-                            <strong>系统指标：</strong> 非结构化高噪环境规划成功率 >90% | 平均规划耗时 <100ms（收敛速度与平滑度均优于标杆 A* 与传统 RRT 算法）。
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-header">
-                        <div class="project-name">中广核智能起重机控制系统</div>
-                        <div class="project-time">2025.09 - 2025.12</div>
-                    </div>
-                    <div class="project-desc">
-                        <ul>
-                            <li>参与工业级 PLC 梯形图逻辑编程与联调，保障重型行车在多工况（自动/手操）下的目标容器安全抓取与高精度放置。</li>
-                            <li>独立开发基于 MFC 的上位机总控平台，构建设备与操作员间的低延迟指令通道，实现起重抓具的全自动化作业编排。</li>
-                            <li>协同开发机器视觉定位模块，设计容器盖板特征提取与圆心拟合算法，引导执行机构完成亚毫米级精准抓取。</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="fpga">
-            <div class="section-header fade-in">
-                <h2 class="section-title"><span>03.</span>底层硬件与 FPGA 架构</h2>
-            </div>
-            <div class="project-list">
-
-                <div class="project-card fade-in">
-                    <div class="project-header">
-                        <div class="project-name">FPGA 岗位核心研发职责</div>
-                        <div class="project-time">研发工程师</div>
-                    </div>
-                    <div class="project-desc">
-                        <ul>
-                            <li><strong>DT2300 测控项目：</strong>部署 AD7606 完成 8 通道并行数据采集；基于 HLS 技术栈实现特征值高速运算协处理器；重构 AXI4-DMA 与 AXI4-Lite 总线拓扑，打通 PL 侧与 PS 侧的高吞吐数据交互，并主笔系统级设计规范。</li>
-                            <li><strong>存储控制器设计：</strong>基于安陆 SF1 系列 FPGA，独立设计带有硬件仲裁机制的三帧缓存 PSRAM 控制器，确保多通道并发读写时序的安全与高效。</li>
-                            <li><strong>系统级维护：</strong>接手并优化 DW1900S 遗留项目代码基线，熟练使用 ISE 工具链进行时序收敛与程序固化。</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-header">
-                        <div class="project-name">基于 NVMe 协议的视频高速存储与回放系统</div>
-                        <div class="project-time">2025.09 - 2026.03</div>
-                    </div>
-                    <div class="project-desc">
-                        <ul>
-                            <li>深度定制 PCIe EP 控制器（基于 XDMA），独立完成 Type0 配置空间初始化与 BAR 地址映射，建立 NVMe 设备的底层物理链接。</li>
-                            <li>从零构建轻量级 NVMe 协议栈，封装 Admin 与 I/O 队列的读写调度机制，实现复杂命令包的精确封包与解包逻辑。</li>
-                            <li>设计基于公平仲裁策略的多通道 AXI4-DMA 调度器，管理流媒体数据包的双向路由，实现海量视频流的无掉帧存储与高实时回放。</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-header">
-                        <div class="project-name">基于 FPGA 的图像 SIFT 特征提取与硬件加速验证</div>
-                        <div class="project-time">2024.10 - 2025.05</div>
-                    </div>
-                    <div class="project-desc">
-                        <ul>
-                            <li>主导图像处理流水线硬件加速，完成基于 SIFT 的特征提取与图像拼接算子设计（涵盖 Harris 角点检测、CORDIC 极坐标解算、LFSR 随机数注入、高斯消元阵列、单应性矩阵变换及像素级加权融合）。</li>
-                            <li>架构设计支持任意 burst 长度与多通道并行的 AXI4-DMA 内存管理器，突破数据搬运瓶颈，实现跨模块数据的分区隔离与高效转运。</li>
-                            <li>搭建基于 XDMA 的全双工高速物理总线，打通异构计算平台（FPGA-PC）数据链路，并编写桌面端程序完成描述子匹配的可视化验证。</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-header">
-                        <div class="project-name">基于 FPGA 的多功能实时图像处理平台 (本科毕设)</div>
-                        <div class="project-time">2023.12 - 2024.04</div>
-                    </div>
-                    <div class="project-desc">
-                        <ul>
-                            <li>攻克 MIPI CSI-2 物理层协议，完成 OV5640 传感器驱动开发与时序校准。硬化多项图像处理核心算法（仿射变换、空域滤波、边缘检测与动态融合）。</li>
-                            <li>创新性设计分奇偶 Bank 寻址的三帧缓存 AXI-DMA 控制架构，彻底消除视频流拼接过程中的画面撕裂与显存读写冲突。</li>
-                            <li>开发基于串口通信的指令集系统与上位机终端，实现 FPGA 算子流水线的动态重配与多显示模式的热切换。</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-    </div>
-
-    <footer>
-        <p>Resume © 2026</p>
-    </footer>
-
-    <script>
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(element => {
-            observer.observe(element);
-        });
-
-        const textArray = ["机器人算法工程师", "FPGA与底层硬件开发者", "全栈具身智能研发者"];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typeTarget = document.getElementById("typewriter-text");
-
-        function type() {
-            const currentText = textArray[textIndex];
-
-            if (isDeleting) {
-                typeTarget.textContent = currentText.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typeTarget.textContent = currentText.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let typeSpeed = 100;
-            if (isDeleting) typeSpeed /= 2;
-
-            if (!isDeleting && charIndex === currentText.length) {
-                typeSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % textArray.length;
-                typeSpeed = 500;
-            }
-
-            setTimeout(type, typeSpeed);
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(type, 1000);
-        });
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
     </script>
+<meta name="description" content="连接底层硅片与具身智能">
+<meta property="og:title" content="SuerEchoY">
+<meta property="og:description" content="连接底层硅片与具身智能">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://SuerEchoY.github.io">
+<meta property="og:image" content="https://github.com/SuerEchoY.png">
+<title>SuerEchoY</title>
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.avatar {transition: 0.8s;width:64px;height:64px;object-fit: cover;}
+.avatar:hover{transform: scale(1.15) rotate(360deg);}
+.title-left a{color:inherit;text-decoration:none;vertical-align: bottom;font-size:40px;font-weight: bold;font-family:Monaco;margin-left:8px;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right button{margin-right:8px;padding:16px;}
+.title-right .circle{padding: 14px 16px;}
+
+.SideNav{min-width: 360px;}
+.SideNav-icon{margin-right: 16px}
+.SideNav-item .Label{color: #fff;margin-left:4px;}
+.d-flex{min-width:0;}
+.listTitle{overflow:hidden;white-space:nowrap;text-overflow: ellipsis;max-width: 100%;}
+.listLabels{white-space:nowrap;display:flex;}
+.listLabels object{max-height:16px;max-width:24px;}
+
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .avatar {width:40px;height:40px;}
+    .blogTitle{display:none;}
+    #buttonRSS{display:none;}
+    .LabelTime{display:none;}
+}
+</style>
+
+
+
+<body>
+    <div id="header">
+<div class="title-left">
+    <img src="https://github.com/SuerEchoY.png" class="avatar circle" id="avatarImg" alt="avatar"><a class="blogTitle">SuerEchoY</a></div>
+<div class="title-right">
+    <a href="https://SuerEchoY.github.io/tag.html" id="buttonSearch" class="btn btn-invisible circle" title="搜索">
+        <svg class="octicon" width="16" height="16" >
+            <path id="pathSearch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    <a href="https://github.com/SuerEchoY" class="btn btn-invisible circle" title="GitHub" target="_blank">
+        <svg class="octicon" width="16" height="16" >
+            <path id="GitHub" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://SuerEchoY.github.io/rss.xml" target="_blank" id="buttonRSS" class="btn btn-invisible circle" title="RSS">
+        <svg class="octicon" width="16" height="16" >
+            <path id="pathRSS" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    <a class="btn btn-invisible circle" onclick="modeSwitch()" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+</div>
+</div>
+    <div id="content">
+<div style="margin-bottom: 16px;">连接底层硅片与具身智能</div>
+<nav class="SideNav border">
+
+</nav>
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://SuerEchoY.github.io">SuerEchoY</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if("04/04/2026"!=""){
+    var startSite=new Date("04/04/2026");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
+}
+</script></div>
 </body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'search': 'M15.7 13.3l-3.81-3.83A5.93 5.93 0 0 0 13 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 0 0 0-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z', 'rss': 'M2.002 2.725a.75.75 0 0 1 .797-.699C8.79 2.42 13.58 7.21 13.974 13.201a.75.75 0 0 1-1.497.098 10.502 10.502 0 0 0-9.776-9.776.747.747 0 0 1-.7-.798ZM2.84 7.05h-.002a7.002 7.002 0 0 1 6.113 6.111.75.75 0 0 1-1.49.178 5.503 5.503 0 0 0-4.8-4.8.75.75 0 0 1 .179-1.489ZM2 13a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z', 'upload': 'M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z M11.78 4.72a.749.749 0 1 1-1.06 1.06L8.75 3.811V9.5a.75.75 0 0 1-1.5 0V3.811L5.28 5.78a.749.749 0 1 1-1.06-1.06l3.25-3.25a.749.749 0 0 1 1.06 0l3.25 3.25Z', 'post': 'M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25ZM3.5 6.25a.75.75 0 0 1 .75-.75h7a.75.75 0 0 1 0 1.5h-7a.75.75 0 0 1-.75-.75Zm.75 2.25h4a.75.75 0 0 1 0 1.5h-4a.75.75 0 0 1 0-1.5Z', 'about': 'M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z', 'portfolio': None};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathSearch").setAttribute("d",IconList["search"]);
+document.getElementById("pathRSS").setAttribute("d",IconList["rss"]);
+iconTOP=document.getElementsByClassName("svgTop1");
+iconPost=document.getElementsByClassName("svgTop0");
+for(var i=0;i<iconTOP.length;i++){
+    iconTOP[i].setAttribute("d",IconList["upload"]);
+    iconTOP[i].parentNode.style.color="red";
+}
+for(var i=0;i<iconPost.length;i++){
+    iconPost[i].setAttribute("d",IconList["post"]);
+}
+
+
+document.getElementById("GitHub").setAttribute("d",value=IconList["GitHub"]);
+
+
+</script>
+
+
 </html>
