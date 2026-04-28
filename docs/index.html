@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html data-color-mode="light" data-dark-theme="dark_dimmed" data-light-theme="dark_dimmed" lang="zh-CN">
 <head>
+<<<<<<< HEAD
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -157,3 +158,542 @@ document.getElementById("GitHub").setAttribute("d",value=IconList["GitHub"]);
 
 
 </html>
+=======
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简历 | 机器人与FPGA全栈研发</title>
+    <style>
+        :root {
+            --bg-base: #030712;
+            --bg-surface: #111827;
+            --border-line: #1f2937;
+            --accent-primary: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+            --text-heading: #f9fafb;
+            --text-body: #9ca3af;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Consolas, monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-body);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; width: 100%; height: 70px;
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid transparent;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        nav.scrolled {
+            border-bottom: 1px solid var(--border-line);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            background: rgba(3, 7, 18, 0.95);
+        }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a {
+            color: var(--text-heading);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-family: var(--font-mono);
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent-primary); }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in.visible {
+            opacity: 1;
+            <!DOCTYPE html>
+            <html lang="zh-CN">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>个人简历 | 机器人与FPGA全栈研发</title>
+                <style>
+                    :root {
+                        --bg-base: #030712;
+                        --bg-surface: #111827;
+                        --border-line: #1f2937;
+                        --accent-primary: #3b82f6; 
+                        --accent-glow: rgba(59, 130, 246, 0.15);
+                        --text-heading: #f9fafb;
+                        --text-body: #9ca3af;
+                        --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                        --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Consolas, monospace;
+                    }
+
+                    * { margin: 0; padding: 0; box-sizing: border-box; }
+                    html { scroll-behavior: smooth; }
+
+                    body {
+                        background-color: var(--bg-base);
+                        color: var(--text-body);
+                        font-family: var(--font-sans);
+                        line-height: 1.6; /* 调小了全局行高 */
+                        overflow-x: hidden;
+                        text-align: justify; /* 两端对齐,消除右侧参差不齐的空格感 */
+                    }
+
+                    /* 导航栏 */
+                    nav {
+                        position: fixed;
+                        top: 0; width: 100%; height: 60px; /* 降低导航栏高度 */
+                        background: rgba(3, 7, 18, 0.85);
+                        backdrop-filter: blur(12px);
+                        border-bottom: 1px solid transparent;
+                        display: flex; justify-content: center; align-items: center;
+                        z-index: 1000;
+                        transition: all 0.3s ease;
+                    }
+                    nav.scrolled {
+                        border-bottom: 1px solid var(--border-line);
+                        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+                        background: rgba(3, 7, 18, 0.95);
+                    }
+                    .nav-links { display: flex; gap: 35px; list-style: none; }
+                    .nav-links a { 
+                        color: var(--text-heading); 
+                        text-decoration: none; 
+                        font-size: 0.85rem; 
+                        font-family: var(--font-mono);
+                        transition: color 0.3s; 
+                    }
+                    .nav-links a:hover { color: var(--accent-primary); }
+
+                    .container { max-width: 1050px; margin: 0 auto; padding: 0 20px; }
+        
+                    /* 动画类 */
+                    .fade-in {
+                        opacity: 0;
+                        transform: translateY(20px);
+                        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+                    }
+                    .fade-in.visible {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+
+                    /* 通用区块标题 */
+                    .section-header { margin: 80px 0 35px 0; } /* 缩小标题上下间距 */
+                    .section-title {
+                        font-size: 1.6rem;
+                        color: var(--text-heading);
+                        display: flex;
+                        align-items: center;
+                        font-weight: 700;
+                    }
+                    .section-title::after {
+                        content: ""; flex-grow: 1; height: 1px;
+                        background: var(--border-line); margin-left: 20px;
+                    }
+                    .section-title span { color: var(--accent-primary); font-family: var(--font-mono); margin-right: 12px; font-size: 1.3rem; }
+
+                    /* 主页 (Hero Section) */
+                    #home {
+                        min-height: 100vh;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        padding-top: 60px;
+                    }
+                    .hero-pre { font-family: var(--font-mono); color: var(--accent-primary); margin-bottom: 15px; font-size: 0.9rem; }
+                    .hero-title { font-size: clamp(2.5rem, 6vw, 4rem); color: var(--text-heading); font-weight: 800; line-height: 1.1; margin-bottom: 15px; }
+                    .hero-subtitle { font-size: clamp(1.2rem, 3vw, 2rem); color: var(--text-body); font-weight: 600; margin-bottom: 25px; height: 2.5rem; }
+        
+                    /* 打字机光标 */
+                    .cursor {
+                        display: inline-block; width: 3px; height: 1em;
+                        background-color: var(--accent-primary);
+                        vertical-align: text-bottom;
+                        animation: blink 0.8s infinite;
+                        margin-left: 4px;
+                    }
+                    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+                    .hero-desc { max-width: 650px; font-size: 1rem; margin-bottom: 35px; line-height: 1.6; }
+                    .hero-actions { display: flex; gap: 15px; }
+                    .btn {
+                        padding: 12px 24px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.85rem;
+                        text-decoration: none; transition: all 0.3s;
+                    }
+                    .btn-primary { background: transparent; border: 1px solid var(--accent-primary); color: var(--accent-primary); }
+                    .btn-primary:hover { background: var(--accent-glow); }
+
+                    /* 核心技能模块 (紧凑版) */
+                    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; } /* 缩小模块间距 */
+                    .skill-group {
+                        background: var(--bg-surface);
+                        border: 1px solid var(--border-line);
+                        border-radius: 6px;
+                        padding: 20px; /* 缩小内边距 */
+                        transition: transform 0.2s, border-color 0.2s;
+                    }
+                    .skill-group:hover { transform: translateY(-3px); border-color: #374151; }
+                    .skill-group h3 { font-size: 1rem; color: var(--text-heading); margin-bottom: 12px; font-family: var(--font-mono); }
+                    .skill-list { list-style: none; }
+                    .skill-list li { 
+                        margin-bottom: 6px; /* 缩小列表项间距 */
+                        display: flex; align-items: flex-start; gap: 8px; 
+                        font-size: 0.9rem; line-height: 1.5; 
+                    }
+                    .skill-list li::before { content: "▹"; color: var(--accent-primary); font-weight: bold; }
+
+                    /* 项目模块 (紧凑版) */
+                    .project-list { display: flex; flex-direction: column; gap: 25px; } /* 缩小项目卡片间距 */
+                    .project-card {
+                        background: var(--bg-surface);
+                        border: 1px solid var(--border-line);
+                        border-radius: 6px;
+                        padding: 25px; /* 缩小内边距 */
+                        position: relative;
+                        overflow: hidden;
+                        transition: box-shadow 0.2s;
+                    }
+                    .project-card:hover { box-shadow: 0 8px 25px -10px rgba(0,0,0,0.5); }
+                    .project-card::before {
+                        content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+                        background: var(--accent-primary); opacity: 0; transition: opacity 0.3s;
+                    }
+                    .project-card:hover::before { opacity: 1; }
+        
+                    .project-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+                    .project-name { font-size: 1.25rem; font-weight: 700; color: var(--text-heading); }
+                    .project-time { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-primary); }
+        
+                    .project-desc { font-size: 0.9rem; line-height: 1.6; }
+                    .project-desc .context { margin-bottom: 15px; color: #d1d5db; }
+                    .sub-title { color: var(--text-heading); font-weight: 600; margin: 12px 0 8px; font-size: 0.95rem; }
+                    .project-desc ul { padding-left: 18px; list-style-type: none; }
+                    .project-desc li { margin-bottom: 6px; position: relative; } /* 缩小项目描述间距 */
+                    .project-desc li::before { content: "·"; position: absolute; left: -14px; color: var(--accent-primary); font-weight: bold; font-size: 1.2rem; line-height: 1; }
+
+                    .highlight-metrics {
+                        margin-top: 18px; background: rgba(59, 130, 246, 0.05);
+                        border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 4px;
+                        padding: 12px 15px; font-size: 0.85rem; color: #d1d5db;
+                    }
+                    .highlight-metrics strong { font-family: var(--font-mono); font-weight: normal; color: var(--accent-primary); }
+
+                    footer { text-align: center; padding: 40px; color: var(--text-body); font-family: var(--font-mono); font-size: 0.8rem; }
+                </style>
+            </head>
+            <body>
+
+                <nav id="navbar">
+                    <ul class="nav-links">
+                        <li><a href="#home">首页</a></li>
+                        <li><a href="#skills">核心技能</a></li>
+                        <li><a href="#robotics">机器人工程</a></li>
+                        <li><a href="#fpga">硬件与FPGA</a></li>
+                    </ul>
+                </nav>
+
+                <div class="container">
+                    <section id="home" class="fade-in">
+                        <p class="hero-pre">Hi, 欢迎来到我的个人博客</p>
+                        <h1 class="hero-title">SuerEchoY</h1>
+                        <h2 class="hero-subtitle">
+                            <span id="typewriter-text"></span><span class="cursor"></span>
+                        </h2>
+                        <p class="hero-desc">
+                            一个喜欢嵌入式,FPGA和机器人的技术爱好者,喜欢钻研各种技术,徜徉于技术的海洋中 
+                        </p>
+                        <div class="hero-actions">
+                            <a href="#skills"  class="btn btn-primary">查看核心技能</a>
+                            <a href="#robotics" class="btn btn-primary">机器人项目经验</a>
+                            <a href="#fpga" class="btn btn-primary">FPGA项目经验</a>
+                        </div>
+                    </section>
+
+                    <section id="skills">
+                        <div class="section-header fade-in">
+                            <h2 class="section-title"><span>01.</span>核心技术栈</h2>
+                        </div>
+                        <div class="skills-grid">
+                
+                            <div class="skill-group fade-in" style="transition-delay: 0.1s;">
+                                <h3>[ 基础编程语言与工具 ]</h3>
+                                <ul class="skill-list">
+                                    <li>掌握C/C++ (C++11/14/17),具备深厚的面向对象与泛型编程基础</li>
+                                    <li>熟练应用Python/Matlab在工程上进行辅助开发</li>
+                                    <li>掌握Verilog HDL硬件描述语言,具备复杂的数字逻辑架构设计能力</li>
+                                    <li>熟练使用 Git、CMake、Linux Shell 等工程化构建与协同开发工具</li>
+                                </ul>
+                            </div>
+
+                            <div class="skill-group fade-in" style="transition-delay: 0.2s;">
+                                <h3>[ 嵌入式与系统级开发 ]</h3>
+                                <ul class="skill-list">
+                                    <li>具备扎实的裸机开发经验,熟练掌握STM32等 MCU 及常见外设总线控制</li>
+                                    <li>熟悉Linux 应用层开发,包括多线程/多进程、QT上位机编写及跨平台编译等</li>
+                                    <li>掌握Linux 设备驱动开发,熟悉常用的字符设备开发流程</li>
+                                    <li>熟悉简单的Linux uboot,kernel,rootfs系统移植</li>
+                                </ul>
+                            </div>
+
+                            <div class="skill-group fade-in" style="transition-delay: 0.3s;">
+                                <h3>[ FPGA 底层硬件架构 ]</h3>
+                                <ul class="skill-list">
+                                    <li>掌握高速通路搭建,熟练开发 MIPI、SRIO、CY3014、GTX、PCIe 等高速接口</li>
+                                    <li>掌握传统图像处理算法,具备从 MATLAB 算法验证到 FPGA 硬件部署的完整落地能力</li>
+                                    <li>掌握 AXI4/AXI4-Lite/AXI4-DMA 等总线架构,具备高并发数据缓存与硬件仲裁机制设计经验</li>
+                                </ul>
+                            </div>
+
+                            <div class="skill-group fade-in" style="transition-delay: 0.4s;">
+                                <h3>[ 经典机器人自主导航 ]</h3>
+                                <ul class="skill-list">
+                                    <li>掌握ROS 1/2机器人中间件,具备复杂多节点开发与分布式系统总成能力</li>
+                                    <li>熟练应用 3D SLAM 建图框架(Faster-LIO)与 PCL/OpenCV 点云视觉处理流</li>
+                                    <li>掌握全局与局部路径规划算法(A*、Theta*、JPS、RRT系列及自研碰撞点采样算法)</li>
+                                    <li>掌握移动机器人底层运动学模型解析与多线程状态机安全调度</li>
+                                </ul>
+                            </div>
+
+                            <div class="skill-group fade-in" style="transition-delay: 0.5s;">
+                                <h3>[ 具身智能与强化学习 ]</h3>
+                                <ul class="skill-list">
+                                    <li>熟练使用Isaac Gym / Isaac Lab 物理仿真平台,进行机器人的高度并行化训练</li>
+                                    <li>掌握强化学习(RL)算法工程实践,能够搭建 MLP/LSTM 等网络策略优化复杂地形步态</li>
+                                    <li>具备丰富的 Sim2Real(仿真到现实)部署经验,打通网络策略输出到真实电机控制指令(/cmd_vel)的闭环</li>
+                                </ul>
+                            </div>
+
+                            <div class="skill-group fade-in" style="transition-delay: 0.6s;">
+                                <h3>[ 综合拓展技能 ]</h3>
+                                <ul class="skill-list">
+                                    <li> 跨平台开发: 熟练应用 Flutter 跨平台框架,构建支持 SSH/Rosbridge 协议的移动端控制 App</li>
+                                    <li> 工业自动化: 具备工业级自动化控制经验,熟悉 PLC 梯形图编程与智能起重设备联调</li>
+                                    <li> PCB绘制: 使用嘉立创EDA工具完成一些简单二层板的绘制</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <section id="robotics">
+                        <div class="section-header fade-in">
+                            <h2 class="section-title"><span>02.</span>机器人工程实践</h2>
+                        </div>
+                        <div class="project-list">
+                
+                            <div class="project-card fade-in">
+                                <div class="project-header">
+                                    <div class="project-name">基于宇树 Unitree Go2 的四足机器人自主导航系统</div>
+                                    <div class="project-time">2025.10 - 2026.12</div>
+                                </div>
+                                <div class="project-desc">
+                                    <p class="context">基于 Lightning-LM SLAM 框架,重构并实现四足机器人的全局导航与运动控制总成,涵盖感知处理、路径规划、运动控制及前端交互四大模块</p>
+                        
+                                    <div class="sub-title">核心贡献:</div>
+                                    <ul>
+                                        <li><strong>SLAM算法优化:</strong>改进 Faster-LIO 建图逻辑,提出在 ICP 点面匹配前介入 XY 与 Z 轴预匹配策略,显著收敛 Z 轴累计漂移</li>
+                                        <li><strong>异构规划器集成:</strong>统筹图搜索(A*、JPS)、随机采样(RRT 系列)及自研 RRCT 算法引入拐角检测与平滑优化,使复杂地形下的规划效率提升 35%</li>
+                                        <li><strong>控制中枢开发:</strong>设计多线程并发控制器,接管 12-DOF 电机状态机封装 4 类控制域(距离/角度/位置/导航)与 20+ 动作原语,维持高频里程计广播</li>
+                                        <li><strong>环境感知流:</strong>搭建 PCL+OpenCV 处理管线,实现 3D 点云至 2D 栅格的降维投影,结合动态障碍物检测完成像素空间至 3D 物理坐标的双向精准映射</li>
+                                        <li><strong>协议与交互部署:</strong>深度解耦 Unitree SDK,重构 JSON 序列化协议与 TF 树管理机制；独立开发基于 Flutter 的移动端终控 APP,利用 SSH 与 ros2bridge 闭环远程遥测链路</li>
+                                    </ul>
+                        
+                                    <div class="highlight-metrics">
+                                        <strong>系统指标:</strong> 复杂环境建图与规划成功率 >95% | 平均路径解算耗时 <100ms | 传感器至执行器全链路延迟 <200ms
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="project-card fade-in">
+                                <div class="project-header">
+                                    <div class="project-name">基于宇树 B1 四足机器人的核安保巡检系统</div>
+                                    <div class="project-time">2025.06 - 2025.12</div>
+                                </div>
+                                <div class="project-desc">
+                                    <p class="context">面向核电站高危环境,主导开发集远程测控、多源传感器同步采集及自主航迹规划于一体的特种机器人巡检平台</p>
+                        
+                                    <div class="sub-title">核心贡献:</div>
+                                    <ul>
+                                        <li><strong>异地通信总线:</strong>主导底层无线链路开发,基于 ESP8266 固件编写实现高可靠性的指令透传与图传数据流推送</li>
+                                        <li><strong>定制化 RVIZ 平台:</strong>基于 QT 框架开发地面站测控软件,集成航点指派、代价地图渲染、地图拓扑编辑及点云/机体模型实时可视化功能</li>
+                                        <li><strong>多传感器时钟同步:</strong>主导硬件同步板与 GPS 传感器的时序调优,实现 IMU、视觉传感器与 GPS 数据的严格对齐；编写 NMEA 解析栈并接入 ROS 通信网段</li>
+                                        <li><strong>自研规划算法落地:</strong>参与实验室自研“基于碰撞点采样算法”的核心逻辑开发与代码重构,完成边界生成与航线平滑</li>
+                                    </ul>
+
+                                    <div class="highlight-metrics">
+                                        <strong>系统指标:</strong> 非结构化高噪环境规划成功率 >90% | 平均规划耗时 <100ms(收敛速度与平滑度均优于标杆 A* 与传统 RRT 算法)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="project-card fade-in">
+                                <div class="project-header">
+                                    <div class="project-name">中广核智能起重机控制系统</div>
+                                    <div class="project-time">2025.09 - 2025.12</div>
+                                </div>
+                                <div class="project-desc">
+                                    <ul>
+                                        <li>参与工业级 PLC 梯形图逻辑编程与联调,保障重型行车在多工况(自动/手操)下的目标容器安全抓取与高精度放置</li>
+                                        <li>独立开发基于 MFC 的上位机总控平台,构建设备与操作员间的低延迟指令通道,实现起重抓具的全自动化作业编排</li>
+                                        <li>协同开发机器视觉定位模块,设计容器盖板特征提取与圆心拟合算法,引导执行机构完成亚毫米级精准抓取</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <section id="fpga">
+                        <div class="section-header fade-in">
+                            <h2 class="section-title"><span>03.</span>FPGA项目经验</h2>
+                        </div>
+                        <div class="project-list">
+                
+                            <div class="project-card fade-in">
+                                <div class="project-header">
+                                    <div class="project-name">FPGA实习经历</div>
+                                    <div class="project-time">FPGA工程师</div>
+                                </div>
+                                <div class="project-desc">
+                                    <ul>
+                                        <li><strong>DT2300 数据采集处理项目:</strong>部署 AD7606 完成 8 通道并行数据采集；基于 HLS 技术栈实现特征值高速运算协处理器；重构 AXI4-DMA 与 AXI4-Lite 总线拓扑,打通 PL 与 PS 侧高吞吐数据交互,并主笔设计规范</li>
+                                        <li><strong>存储控制器设计:</strong>基于安陆 SF1 系列 FPGA,独立设计带有硬件仲裁机制的三帧缓存 PSRAM 控制器,确保多通道并发读写时序的安全与高效</li>
+                                        <li><strong>系统级维护:</strong>接手并优化 DW1900S 遗留项目代码基线,熟练使用 ISE 工具链进行时序收敛与程序固化</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="project-card fade-in">
+                                <div class="project-header">
+                                    <div class="project-name">基于 NVMe 协议的视频高速存储与回放系统</div>
+                                    <div class="project-time">2025.09 - 2026.03</div>
+                                </div>
+                                <div class="project-desc">
+                                    <ul>
+                                        <li>深度定制 PCIe EP 控制器(基于 XDMA),独立完成 Type0 配置空间初始化与 BAR 地址映射,建立 NVMe 设备的底层物理链接</li>
+                                        <li>从零构建轻量级 NVMe 协议栈,封装 Admin 与 I/O 队列的读写调度机制,实现复杂命令包的精确封包与解包逻辑</li>
+                                        <li>设计基于公平仲裁策略的多通道 AXI4-DMA 调度器,管理流媒体数据包的双向路由,实现海量视频流的无掉帧存储与高实时回放</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="project-card fade-in">
+                                <div class="project-header">
+                                    <div class="project-name">基于 FPGA 的图像 SIFT 特征提取与硬件加速验证</div>
+                                    <div class="project-time">2024.10 - 2025.05</div>
+                                </div>
+                                <div class="project-desc">
+                                    <ul>
+                                        <li>主导图像流水线硬件加速,完成基于 SIFT 的特征提取与图像拼接算子设计(涵盖 Harris 角点检测、CORDIC 极坐标解算、LFSR 随机数注入、高斯消元阵列、单应性变换及加权融合)</li>
+                                        <li>架构设计支持任意 burst 长度与多通道并行的 AXI4-DMA 内存管理器,突破数据搬运瓶颈,实现跨模块数据的分区隔离与高效转运</li>
+                                        <li>搭建基于 XDMA 的全双工高速物理总线,打通异构计算平台(FPGA-PC)数据链路,并编写桌面端程序完成描述子匹配的可视化验证</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="project-card fade-in">
+                                <div class="project-header">
+                                    <div class="project-name">基于 FPGA 的多功能实时图像处理平台 (本科毕设)</div>
+                                    <div class="project-time">2023.12 - 2024.04</div>
+                                </div>
+                                <div class="project-desc">
+                                    <ul>
+                                        <li>攻克 MIPI CSI-2 物理层协议,完成 OV5640 传感器驱动开发与时序校准硬化多项图像处理核心算法(仿射变换、空域滤波、边缘检测与动态融合)</li>
+                                        <li>创新性设计分奇偶 Bank 寻址的三帧缓存 AXI-DMA 控制架构,彻底消除视频流拼接过程中的画面撕裂与显存读写冲突</li>
+                                        <li>开发基于串口通信的指令集系统与上位机终端,实现 FPGA 算子流水线的动态重配与多显示模式的热切换</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+
+                <footer>
+                    <p>Resume © 2026</p>
+                </footer>
+
+                <script>
+                    // 导航栏滚动样式切换
+                    window.addEventListener('scroll', () => {
+                        const nav = document.getElementById('navbar');
+                        if (window.scrollY > 50) {
+                            nav.classList.add('scrolled');
+                        } else {
+                            nav.classList.remove('scrolled');
+                        }
+                    });
+
+                    // 滚动淡入动画 (Intersection Observer)
+                    const observerOptions = {
+                        root: null,
+                        rootMargin: '0px',
+                        threshold: 0.1
+                    };
+
+                    const observer = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('visible');
+                                observer.unobserve(entry.target); 
+                            }
+                        });
+                    }, observerOptions);
+
+                    document.querySelectorAll('.fade-in').forEach(element => {
+                        observer.observe(element);
+                    });
+
+                    // 打字机效果
+                    const textArray = ["机器人工程师", "FPGA与底层硬件开发者", "具身智能研发者"];
+                    let textIndex = 0;
+                    let charIndex = 0;
+                    let isDeleting = false;
+                    const typeTarget = document.getElementById("typewriter-text");
+
+                    function type() {
+                        const currentText = textArray[textIndex];
+            
+                        if (isDeleting) {
+                            typeTarget.textContent = currentText.substring(0, charIndex - 1);
+                            charIndex--;
+                        } else {
+                            typeTarget.textContent = currentText.substring(0, charIndex + 1);
+                            charIndex++;
+                        }
+
+                        let typeSpeed = 100;
+                        if (isDeleting) typeSpeed /= 2;
+
+                        if (!isDeleting && charIndex === currentText.length) {
+                            typeSpeed = 2000; 
+                            isDeleting = true;
+                        } else if (isDeleting && charIndex === 0) {
+                            isDeleting = false;
+                            textIndex = (textIndex + 1) % textArray.length;
+                            typeSpeed = 500; 
+                        }
+
+                        setTimeout(type, typeSpeed);
+                    }
+        
+                    document.addEventListener("DOMContentLoaded", function() {
+                        setTimeout(type, 1000);
+                    });
+                </script>
+            </body>
+            </html>
+>>>>>>> e8b344b (v2)
