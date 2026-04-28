@@ -3,511 +3,474 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuerEchoY | 个人简历</title>
-    <meta name="description" content="SuerEchoY 的个人简历与项目展示主页，聚焦机器人、FPGA 与嵌入式系统。">
+    <title>个人简历 | 机器人与FPGA全栈研发</title>
     <style>
         :root {
-            --bg: #0b1020;
-            --bg-2: #11182d;
-            --card: rgba(17, 24, 45, 0.82);
-            --line: rgba(148, 163, 184, 0.18);
-            --text: #e5eefb;
-            --muted: #9fb0c6;
-            --accent: #4f8cff;
-            --accent-2: #7dd3fc;
-            --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
-            --radius: 22px;
-            --max: 1120px;
+            --bg-base: #030712;
+            --bg-surface: #111827;
+            --border-line: #1f2937;
+            --accent-primary: #3b82f6; 
+            --accent-glow: rgba(59, 130, 246, 0.15);
+            --text-heading: #f9fafb;
+            --text-body: #9ca3af;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Consolas, monospace;
         }
 
-        * { box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
+
         body {
-            margin: 0;
-            font-family: Inter, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
-            color: var(--text);
-            background:
-                radial-gradient(circle at 15% 10%, rgba(79, 140, 255, 0.20), transparent 30%),
-                radial-gradient(circle at 85% 0%, rgba(125, 211, 252, 0.16), transparent 28%),
-                linear-gradient(180deg, #070b16 0%, #0b1020 45%, #0f1426 100%);
-            min-height: 100vh;
+            background-color: var(--bg-base);
+            color: var(--text-body);
+            font-family: var(--font-sans);
+            line-height: 1.6; /* 调小了全局行高 */
             overflow-x: hidden;
+            text-align: justify; /* 两端对齐,消除右侧参差不齐的空格感 */
         }
 
-        body::before {
-            content: "";
+        /* 导航栏 */
+        nav {
             position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 90%);
+            top: 0; width: 100%; height: 60px; /* 降低导航栏高度 */
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid transparent;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        nav.scrolled {
+            border-bottom: 1px solid var(--border-line);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            background: rgba(3, 7, 18, 0.95);
+        }
+        .nav-links { display: flex; gap: 35px; list-style: none; }
+        .nav-links a { 
+            color: var(--text-heading); 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-family: var(--font-mono);
+            transition: color 0.3s; 
+        }
+        .nav-links a:hover { color: var(--accent-primary); }
+
+        .container { max-width: 1050px; margin: 0 auto; padding: 0 20px; }
+        
+        /* 动画类 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        a { color: inherit; }
-        .wrap {
-            width: min(var(--max), calc(100vw - 32px));
-            margin: 0 auto;
-        }
-
-        .topbar {
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            backdrop-filter: blur(18px);
-            background: rgba(7, 11, 22, 0.66);
-            border-bottom: 1px solid rgba(148, 163, 184, 0.12);
-        }
-
-        .topbar-inner {
-            width: min(var(--max), calc(100vw - 32px));
-            margin: 0 auto;
+        /* 通用区块标题 */
+        .section-header { margin: 80px 0 35px 0; } /* 缩小标题上下间距 */
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--text-heading);
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            padding: 16px 0;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            min-width: 0;
-        }
-
-        .avatar {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 12px 30px rgba(79, 140, 255, 0.25);
-        }
-
-        .brand h1 {
-            margin: 0;
-            font-size: 1.35rem;
-            line-height: 1.1;
-            letter-spacing: 0.3px;
-        }
-
-        .brand p {
-            margin: 4px 0 0;
-            color: var(--muted);
-            font-size: 0.92rem;
-        }
-
-        .nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: flex-end;
-        }
-
-        .nav a {
-            text-decoration: none;
-            color: var(--muted);
-            border: 1px solid transparent;
-            padding: 10px 14px;
-            border-radius: 999px;
-            transition: all 0.2s ease;
-            font-size: 0.95rem;
-        }
-
-        .nav a:hover {
-            color: var(--text);
-            border-color: rgba(125, 211, 252, 0.22);
-            background: rgba(79, 140, 255, 0.10);
-        }
-
-        .hero {
-            padding: 74px 0 28px;
-            display: grid;
-            grid-template-columns: 1.3fr 0.9fr;
-            gap: 24px;
-            align-items: stretch;
-        }
-
-        .hero-main,
-        .hero-side,
-        .section-card {
-            border: 1px solid var(--line);
-            background: var(--card);
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(14px);
-        }
-
-        .hero-main {
-            border-radius: 30px;
-            padding: 34px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-main::after {
-            content: "";
-            position: absolute;
-            inset: auto -120px -120px auto;
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(79, 140, 255, 0.28), transparent 70%);
-            pointer-events: none;
-        }
-
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
-            border-radius: 999px;
-            border: 1px solid rgba(125, 211, 252, 0.2);
-            background: rgba(79, 140, 255, 0.10);
-            color: #d7e9ff;
-            font-size: 0.84rem;
-            letter-spacing: 0.5px;
-            margin-bottom: 18px;
-        }
-
-        .hero h2 {
-            margin: 0;
-            font-size: clamp(2.2rem, 5vw, 4.4rem);
-            line-height: 1.05;
-            letter-spacing: -0.04em;
-        }
-
-        .hero h2 span {
-            color: var(--accent-2);
-        }
-
-        .hero p {
-            color: var(--muted);
-            font-size: 1.02rem;
-            line-height: 1.8;
-            max-width: 68ch;
-            margin: 18px 0 0;
-        }
-
-        .actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 26px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 46px;
-            padding: 0 18px;
-            border-radius: 999px;
-            text-decoration: none;
-            transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
-            border: 1px solid rgba(125, 211, 252, 0.20);
-            background: rgba(79, 140, 255, 0.11);
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        .btn:hover { transform: translateY(-1px); }
-        .btn.primary {
-            background: linear-gradient(135deg, var(--accent), #66b5ff);
-            border-color: transparent;
-            color: white;
-        }
-
-        .hero-side {
-            border-radius: 30px;
-            padding: 24px;
-            display: grid;
-            gap: 14px;
-        }
-
-        .metric {
-            padding: 18px;
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(148, 163, 184, 0.14);
-        }
-
-        .metric .label {
-            color: var(--muted);
-            font-size: 0.88rem;
-            margin-bottom: 6px;
-        }
-
-        .metric .value {
-            font-size: 1.14rem;
             font-weight: 700;
         }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(12, minmax(0, 1fr));
-            gap: 18px;
-            padding-bottom: 26px;
-        }
-
-        .section-card {
-            grid-column: span 12;
-            border-radius: 26px;
-            padding: 28px;
-        }
-
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 0 0 18px;
-            font-size: 1.2rem;
-        }
-
         .section-title::after {
-            content: "";
-            height: 1px;
-            flex: 1;
-            background: linear-gradient(90deg, rgba(125, 211, 252, 0.35), transparent);
+            content: ""; flex-grow: 1; height: 1px;
+            background: var(--border-line); margin-left: 20px;
         }
+        .section-title span { color: var(--accent-primary); font-family: var(--font-mono); margin-right: 12px; font-size: 1.3rem; }
 
-        .chips {
+        /* 主页 (Hero Section) */
+        #home {
+            min-height: 100vh;
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 18px;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 60px;
         }
-
-        .chip {
-            padding: 8px 12px;
-            border-radius: 999px;
-            border: 1px solid rgba(125, 211, 252, 0.18);
-            background: rgba(255, 255, 255, 0.03);
-            color: #d7e9ff;
-            font-size: 0.88rem;
+        .hero-pre { font-family: var(--font-mono); color: var(--accent-primary); margin-bottom: 15px; font-size: 0.9rem; }
+        .hero-title { font-size: clamp(2.5rem, 6vw, 4rem); color: var(--text-heading); font-weight: 800; line-height: 1.1; margin-bottom: 15px; }
+        .hero-subtitle { font-size: clamp(1.2rem, 3vw, 2rem); color: var(--text-body); font-weight: 600; margin-bottom: 25px; height: 2.5rem; }
+        
+        /* 打字机光标 */
+        .cursor {
+            display: inline-block; width: 3px; height: 1em;
+            background-color: var(--accent-primary);
+            vertical-align: text-bottom;
+            animation: blink 0.8s infinite;
+            margin-left: 4px;
         }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        .skills {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 14px;
+        .hero-desc { max-width: 650px; font-size: 1rem; margin-bottom: 35px; line-height: 1.6; }
+        .hero-actions { display: flex; gap: 15px; }
+        .btn {
+            padding: 12px 24px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.85rem;
+            text-decoration: none; transition: all 0.3s;
         }
+        .btn-primary { background: transparent; border: 1px solid var(--accent-primary); color: var(--accent-primary); }
+        .btn-primary:hover { background: var(--accent-glow); }
 
-        .skill-card,
-        .project-card,
-        .contact-card {
-            border-radius: 22px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(148, 163, 184, 0.14);
+        /* 核心技能模块 (紧凑版) */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; } /* 缩小模块间距 */
+        .skill-group {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-line);
+            border-radius: 6px;
+            padding: 20px; /* 缩小内边距 */
+            transition: transform 0.2s, border-color 0.2s;
         }
-
-        .skill-card h3,
-        .project-card h3 {
-            margin: 0 0 10px;
-            font-size: 1rem;
+        .skill-group:hover { transform: translateY(-3px); border-color: #374151; }
+        .skill-group h3 { font-size: 1rem; color: var(--text-heading); margin-bottom: 12px; font-family: var(--font-mono); }
+        .skill-list { list-style: none; }
+        .skill-list li { 
+            margin-bottom: 6px; /* 缩小列表项间距 */
+            display: flex; align-items: flex-start; gap: 8px; 
+            font-size: 0.9rem; line-height: 1.5; 
         }
+        .skill-list li::before { content: "▹"; color: var(--accent-primary); font-weight: bold; }
 
-        .skill-card ul,
-        .project-card ul {
-            margin: 0;
-            padding-left: 18px;
-            color: var(--muted);
-            line-height: 1.8;
-        }
-
-        .projects {
-            display: grid;
-            gap: 14px;
-        }
-
+        /* 项目模块 (紧凑版) */
+        .project-list { display: flex; flex-direction: column; gap: 25px; } /* 缩小项目卡片间距 */
         .project-card {
-            display: grid;
-            gap: 10px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-line);
+            border-radius: 6px;
+            padding: 25px; /* 缩小内边距 */
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
         }
+        .project-card:hover { box-shadow: 0 8px 25px -10px rgba(0,0,0,0.5); }
+        .project-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--accent-primary); opacity: 0; transition: opacity 0.3s;
+        }
+        .project-card:hover::before { opacity: 1; }
+        
+        .project-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        .project-name { font-size: 1.25rem; font-weight: 700; color: var(--text-heading); }
+        .project-time { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-primary); }
+        
+        .project-desc { font-size: 0.9rem; line-height: 1.6; }
+        .project-desc .context { margin-bottom: 15px; color: #d1d5db; }
+        .sub-title { color: var(--text-heading); font-weight: 600; margin: 12px 0 8px; font-size: 0.95rem; }
+        .project-desc ul { padding-left: 18px; list-style-type: none; }
+        .project-desc li { margin-bottom: 6px; position: relative; } /* 缩小项目描述间距 */
+        .project-desc li::before { content: "·"; position: absolute; left: -14px; color: var(--accent-primary); font-weight: bold; font-size: 1.2rem; line-height: 1; }
 
-        .project-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            color: var(--muted);
-            font-size: 0.88rem;
+        .highlight-metrics {
+            margin-top: 18px; background: rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 4px;
+            padding: 12px 15px; font-size: 0.85rem; color: #d1d5db;
         }
+        .highlight-metrics strong { font-family: var(--font-mono); font-weight: normal; color: var(--accent-primary); }
 
-        .contact {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-
-        .contact-card p {
-            margin: 0;
-            color: var(--muted);
-            line-height: 1.8;
-        }
-
-        footer {
-            padding: 10px 0 36px;
-            color: var(--muted);
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 900px) {
-            .hero { grid-template-columns: 1fr; padding-top: 48px; }
-            .skills { grid-template-columns: 1fr; }
-            .contact { grid-template-columns: 1fr; }
-            .topbar-inner { flex-direction: column; align-items: flex-start; }
-            .nav { justify-content: flex-start; }
-        }
-
-        @media (max-width: 600px) {
-            .hero-main, .hero-side, .section-card { padding: 20px; border-radius: 20px; }
-            .wrap, .topbar-inner { width: min(var(--max), calc(100vw - 18px)); }
-            .nav a { padding: 8px 11px; }
-        }
+        footer { text-align: center; padding: 40px; color: var(--text-body); font-family: var(--font-mono); font-size: 0.8rem; }
     </style>
 </head>
 <body>
-    <header class="topbar">
-        <div class="topbar-inner">
-            <div class="brand">
-                <img class="avatar" src="https://github.com/SuerEchoY.png" alt="SuerEchoY 头像">
-                <div>
-                    <h1>SuerEchoY</h1>
-                    <p>连接底层硅片与具身智能</p>
-                </div>
-            </div>
-            <nav class="nav" aria-label="页面导航">
-                <a href="#about">简介</a>
-                <a href="#skills">技能</a>
-                <a href="#projects">项目</a>
-                <a href="tag.html">文章</a>
-                <a href="https://github.com/SuerEchoY" target="_blank" rel="noreferrer">GitHub</a>
-            </nav>
-        </div>
-    </header>
 
-    <main class="wrap">
-        <section class="hero" id="about">
-            <div class="hero-main">
-                <div class="eyebrow">个人简历 · 机器人 / FPGA / 嵌入式</div>
-                <h2>做 <span>底层系统</span>，也做 <span>机器人落地</span></h2>
-                <p>
-                    我专注于机器人导航、FPGA 硬件加速、嵌入式系统与工程化协作。
-                    这页保留 Gmeek 的博客能力，同时把首页作为一个简洁、直接的个人简历入口。
-                </p>
-                <div class="actions">
-                    <a class="btn primary" href="#projects">查看项目</a>
-                    <a class="btn" href="tag.html">浏览文章</a>
-                    <a class="btn" href="rss.xml">RSS 订阅</a>
-                </div>
-                <div class="chips" aria-label="核心标签">
-                    <span class="chip">ROS / ROS2</span>
-                    <span class="chip">FPGA / Verilog / AXI</span>
-                    <span class="chip">C++ / Linux / 驱动</span>
-                    <span class="chip">SLAM / 路径规划</span>
-                    <span class="chip">强化学习 / Sim2Real</span>
-                </div>
-            </div>
+    <nav id="navbar">
+        <ul class="nav-links">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#skills">核心技能</a></li>
+            <li><a href="#robotics">机器人工程</a></li>
+            <li><a href="#fpga">硬件与FPGA</a></li>
+        </ul>
+    </nav>
 
-            <aside class="hero-side">
-                <div class="metric">
-                    <div class="label">定位</div>
-                    <div class="value">机器人系统与底层硬件研发</div>
-                </div>
-                <div class="metric">
-                    <div class="label">关注方向</div>
-                    <div class="value">导航、控制、加速、部署</div>
-                </div>
-                <div class="metric">
-                    <div class="label">博客状态</div>
-                    <div class="value">Gmeek + 自定义首页</div>
-                </div>
-            </aside>
-        </section>
-
-        <section class="grid">
-            <div class="section-card" id="skills">
-                <h2 class="section-title">核心技能</h2>
-                <div class="skills">
-                    <div class="skill-card">
-                        <h3>机器人与算法</h3>
-                        <ul>
-                            <li>ROS 1/2 多节点系统与工程总成</li>
-                            <li>Faster-LIO、PCL、OpenCV 点云与视觉处理</li>
-                            <li>A*、JPS、RRT 系列与局部规划</li>
-                        </ul>
-                    </div>
-                    <div class="skill-card">
-                        <h3>FPGA 与硬件</h3>
-                        <ul>
-                            <li>Verilog HDL、AXI4、AXI4-DMA</li>
-                            <li>PCIe、MIPI CSI-2、NVMe 协议栈</li>
-                            <li>HLS、图像处理与硬件加速</li>
-                        </ul>
-                    </div>
-                    <div class="skill-card">
-                        <h3>系统与工程化</h3>
-                        <ul>
-                            <li>C/C++、Python、Linux、Shell</li>
-                            <li>驱动开发、上位机、MFC / QT</li>
-                            <li>Git、CMake、跨平台与协作开发</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-card" id="projects">
-                <h2 class="section-title">项目概览</h2>
-                <div class="projects">
-                    <article class="project-card">
-                        <h3>四足机器人自主导航系统</h3>
-                        <div class="project-meta">
-                            <span>Unitree Go2</span>
-                            <span>导航 / 控制 / 感知闭环</span>
-                        </div>
-                        <p>面向复杂地形的自主导航系统，覆盖建图、路径规划、运动控制与终端交互。</p>
-                    </article>
-                    <article class="project-card">
-                        <h3>NVMe 视频高速存储与回放</h3>
-                        <div class="project-meta">
-                            <span>PCIe EP / XDMA</span>
-                            <span>协议栈 / DMA 调度</span>
-                        </div>
-                        <p>从零构建轻量级 NVMe 协议栈，并实现多通道高速数据存取与回放。</p>
-                    </article>
-                    <article class="project-card">
-                        <h3>FPGA 图像处理与加速验证</h3>
-                        <div class="project-meta">
-                            <span>SIFT / MIPI / 三帧缓存</span>
-                            <span>图像流水线 / 硬件部署</span>
-                        </div>
-                        <p>完成图像处理算子硬件化、缓存仲裁与桌面端可视化验证。</p>
-                    </article>
-                </div>
-            </div>
-
-            <div class="section-card">
-                <h2 class="section-title">联系与入口</h2>
-                <div class="contact">
-                    <div class="contact-card">
-                        <h3>博客入口</h3>
-                        <p>继续保留 Gmeek 的文章体系，首页作为个人简历入口，文章列表和 RSS 仍然可用。</p>
-                    </div>
-                    <div class="contact-card">
-                        <h3>项目主页</h3>
-                        <p>如果你想让这个首页再接近你最开始发来的那版，我可以继续把这里替换成完整的项目履历长页。</p>
-                    </div>
-                </div>
+    <div class="container">
+        <section id="home" class="fade-in">
+            <p class="hero-pre">Hi, 欢迎来到我的个人博客</p>
+            <h1 class="hero-title">SuerEchoY</h1>
+            <h2 class="hero-subtitle">
+                <span id="typewriter-text"></span><span class="cursor"></span>
+            </h2>
+            <p class="hero-desc">
+                一个喜欢嵌入式,FPGA和机器人的技术爱好者,喜欢钻研各种技术,徜徉于技术的海洋中 
+            </p>
+            <div class="hero-actions">
+                <a href="#skills"  class="btn btn-primary">查看核心技能</a>
+                <a href="#robotics" class="btn btn-primary">机器人项目经验</a>
+                <a href="#fpga" class="btn btn-primary">FPGA项目经验</a>
             </div>
         </section>
-    </main>
+
+        <section id="skills">
+            <div class="section-header fade-in">
+                <h2 class="section-title"><span>01.</span>核心技术栈</h2>
+            </div>
+            <div class="skills-grid">
+                
+                <div class="skill-group fade-in" style="transition-delay: 0.1s;">
+                    <h3>[ 基础编程语言与工具 ]</h3>
+                    <ul class="skill-list">
+                        <li>掌握C/C++ (C++11/14/17),具备深厚的面向对象与泛型编程基础</li>
+                        <li>熟练应用Python/Matlab在工程上进行辅助开发</li>
+                        <li>掌握Verilog HDL硬件描述语言,具备复杂的数字逻辑架构设计能力</li>
+                        <li>熟练使用 Git、CMake、Linux Shell 等工程化构建与协同开发工具</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group fade-in" style="transition-delay: 0.2s;">
+                    <h3>[ 嵌入式与系统级开发 ]</h3>
+                    <ul class="skill-list">
+                        <li>具备扎实的裸机开发经验,熟练掌握STM32等 MCU 及常见外设总线控制</li>
+                        <li>熟悉Linux 应用层开发,包括多线程/多进程、QT上位机编写及跨平台编译等</li>
+                        <li>掌握Linux 设备驱动开发,熟悉常用的字符设备开发流程</li>
+                        <li>熟悉简单的Linux uboot,kernel,rootfs系统移植</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group fade-in" style="transition-delay: 0.3s;">
+                    <h3>[ FPGA 底层硬件架构 ]</h3>
+                    <ul class="skill-list">
+                        <li>掌握高速通路搭建,熟练开发 MIPI、SRIO、CY3014、GTX、PCIe 等高速接口</li>
+                        <li>掌握传统图像处理算法,具备从 MATLAB 算法验证到 FPGA 硬件部署的完整落地能力</li>
+                        <li>掌握 AXI4/AXI4-Lite/AXI4-DMA 等总线架构,具备高并发数据缓存与硬件仲裁机制设计经验</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group fade-in" style="transition-delay: 0.4s;">
+                    <h3>[ 经典机器人自主导航 ]</h3>
+                    <ul class="skill-list">
+                        <li>掌握ROS 1/2机器人中间件,具备复杂多节点开发与分布式系统总成能力</li>
+                        <li>熟练应用 3D SLAM 建图框架(Faster-LIO)与 PCL/OpenCV 点云视觉处理流</li>
+                        <li>掌握全局与局部路径规划算法(A*、Theta*、JPS、RRT系列及自研碰撞点采样算法)</li>
+                        <li>掌握移动机器人底层运动学模型解析与多线程状态机安全调度</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group fade-in" style="transition-delay: 0.5s;">
+                    <h3>[ 具身智能与强化学习 ]</h3>
+                    <ul class="skill-list">
+                        <li>熟练使用Isaac Gym / Isaac Lab 物理仿真平台,进行机器人的高度并行化训练</li>
+                        <li>掌握强化学习(RL)算法工程实践,能够搭建 MLP/LSTM 等网络策略优化复杂地形步态</li>
+                        <li>具备丰富的 Sim2Real(仿真到现实)部署经验,打通网络策略输出到真实电机控制指令(/cmd_vel)的闭环</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group fade-in" style="transition-delay: 0.6s;">
+                    <h3>[ 综合拓展技能 ]</h3>
+                    <ul class="skill-list">
+                        <li> 跨平台开发: 熟练应用 Flutter 跨平台框架,构建支持 SSH/Rosbridge 协议的移动端控制 App</li>
+                        <li> 工业自动化: 具备工业级自动化控制经验,熟悉 PLC 梯形图编程与智能起重设备联调</li>
+                        <li> PCB绘制: 使用嘉立创EDA工具完成一些简单二层板的绘制</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="robotics">
+            <div class="section-header fade-in">
+                <h2 class="section-title"><span>02.</span>机器人工程实践</h2>
+            </div>
+            <div class="project-list">
+                
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-name">基于宇树 Unitree Go2 的四足机器人自主导航系统</div>
+                        <div class="project-time">2025.10 - 2026.12</div>
+                    </div>
+                    <div class="project-desc">
+                        <p class="context">基于 Lightning-LM SLAM 框架,重构并实现四足机器人的全局导航与运动控制总成,涵盖感知处理、路径规划、运动控制及前端交互四大模块</p>
+                        
+                        <div class="sub-title">核心贡献:</div>
+                        <ul>
+                            <li><strong>SLAM算法优化:</strong>改进 Faster-LIO 建图逻辑,提出在 ICP 点面匹配前介入 XY 与 Z 轴预匹配策略,显著收敛 Z 轴累计漂移</li>
+                            <li><strong>异构规划器集成:</strong>统筹图搜索(A*、JPS)、随机采样(RRT 系列)及自研 RRCT 算法引入拐角检测与平滑优化,使复杂地形下的规划效率提升 35%</li>
+                            <li><strong>控制中枢开发:</strong>设计多线程并发控制器,接管 12-DOF 电机状态机封装 4 类控制域(距离/角度/位置/导航)与 20+ 动作原语,维持高频里程计广播</li>
+                            <li><strong>环境感知流:</strong>搭建 PCL+OpenCV 处理管线,实现 3D 点云至 2D 栅格的降维投影,结合动态障碍物检测完成像素空间至 3D 物理坐标的双向精准映射</li>
+                            <li><strong>协议与交互部署:</strong>深度解耦 Unitree SDK,重构 JSON 序列化协议与 TF 树管理机制；独立开发基于 Flutter 的移动端终控 APP,利用 SSH 与 ros2bridge 闭环远程遥测链路</li>
+                        </ul>
+                        
+                        <div class="highlight-metrics">
+                            <strong>系统指标:</strong> 复杂环境建图与规划成功率 >95% | 平均路径解算耗时 <100ms | 传感器至执行器全链路延迟 <200ms
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-name">基于宇树 B1 四足机器人的核安保巡检系统</div>
+                        <div class="project-time">2025.06 - 2025.12</div>
+                    </div>
+                    <div class="project-desc">
+                        <p class="context">面向核电站高危环境,主导开发集远程测控、多源传感器同步采集及自主航迹规划于一体的特种机器人巡检平台</p>
+                        
+                        <div class="sub-title">核心贡献:</div>
+                        <ul>
+                            <li><strong>异地通信总线:</strong>主导底层无线链路开发,基于 ESP8266 固件编写实现高可靠性的指令透传与图传数据流推送</li>
+                            <li><strong>定制化 RVIZ 平台:</strong>基于 QT 框架开发地面站测控软件,集成航点指派、代价地图渲染、地图拓扑编辑及点云/机体模型实时可视化功能</li>
+                            <li><strong>多传感器时钟同步:</strong>主导硬件同步板与 GPS 传感器的时序调优,实现 IMU、视觉传感器与 GPS 数据的严格对齐；编写 NMEA 解析栈并接入 ROS 通信网段</li>
+                            <li><strong>自研规划算法落地:</strong>参与实验室自研“基于碰撞点采样算法”的核心逻辑开发与代码重构,完成边界生成与航线平滑</li>
+                        </ul>
+
+                        <div class="highlight-metrics">
+                            <strong>系统指标:</strong> 非结构化高噪环境规划成功率 >90% | 平均规划耗时 <100ms(收敛速度与平滑度均优于标杆 A* 与传统 RRT 算法)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-name">中广核智能起重机控制系统</div>
+                        <div class="project-time">2025.09 - 2025.12</div>
+                    </div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>参与工业级 PLC 梯形图逻辑编程与联调,保障重型行车在多工况(自动/手操)下的目标容器安全抓取与高精度放置</li>
+                            <li>独立开发基于 MFC 的上位机总控平台,构建设备与操作员间的低延迟指令通道,实现起重抓具的全自动化作业编排</li>
+                            <li>协同开发机器视觉定位模块,设计容器盖板特征提取与圆心拟合算法,引导执行机构完成亚毫米级精准抓取</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="fpga">
+            <div class="section-header fade-in">
+                <h2 class="section-title"><span>03.</span>FPGA项目经验</h2>
+            </div>
+            <div class="project-list">
+                
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-name">FPGA实习经历</div>
+                        <div class="project-time">FPGA工程师</div>
+                    </div>
+                    <div class="project-desc">
+                        <ul>
+                            <li><strong>DT2300 数据采集处理项目:</strong>部署 AD7606 完成 8 通道并行数据采集；基于 HLS 技术栈实现特征值高速运算协处理器；重构 AXI4-DMA 与 AXI4-Lite 总线拓扑,打通 PL 与 PS 侧高吞吐数据交互,并主笔设计规范</li>
+                            <li><strong>存储控制器设计:</strong>基于安陆 SF1 系列 FPGA,独立设计带有硬件仲裁机制的三帧缓存 PSRAM 控制器,确保多通道并发读写时序的安全与高效</li>
+                            <li><strong>系统级维护:</strong>接手并优化 DW1900S 遗留项目代码基线,熟练使用 ISE 工具链进行时序收敛与程序固化</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-name">基于 NVMe 协议的视频高速存储与回放系统</div>
+                        <div class="project-time">2025.09 - 2026.03</div>
+                    </div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>深度定制 PCIe EP 控制器(基于 XDMA),独立完成 Type0 配置空间初始化与 BAR 地址映射,建立 NVMe 设备的底层物理链接</li>
+                            <li>从零构建轻量级 NVMe 协议栈,封装 Admin 与 I/O 队列的读写调度机制,实现复杂命令包的精确封包与解包逻辑</li>
+                            <li>设计基于公平仲裁策略的多通道 AXI4-DMA 调度器,管理流媒体数据包的双向路由,实现海量视频流的无掉帧存储与高实时回放</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-name">基于 FPGA 的图像 SIFT 特征提取与硬件加速验证</div>
+                        <div class="project-time">2024.10 - 2025.05</div>
+                    </div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>主导图像流水线硬件加速,完成基于 SIFT 的特征提取与图像拼接算子设计(涵盖 Harris 角点检测、CORDIC 极坐标解算、LFSR 随机数注入、高斯消元阵列、单应性变换及加权融合)</li>
+                            <li>架构设计支持任意 burst 长度与多通道并行的 AXI4-DMA 内存管理器,突破数据搬运瓶颈,实现跨模块数据的分区隔离与高效转运</li>
+                            <li>搭建基于 XDMA 的全双工高速物理总线,打通异构计算平台(FPGA-PC)数据链路,并编写桌面端程序完成描述子匹配的可视化验证</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-name">基于 FPGA 的多功能实时图像处理平台 (本科毕设)</div>
+                        <div class="project-time">2023.12 - 2024.04</div>
+                    </div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>攻克 MIPI CSI-2 物理层协议,完成 OV5640 传感器驱动开发与时序校准硬化多项图像处理核心算法(仿射变换、空域滤波、边缘检测与动态融合)</li>
+                            <li>创新性设计分奇偶 Bank 寻址的三帧缓存 AXI-DMA 控制架构,彻底消除视频流拼接过程中的画面撕裂与显存读写冲突</li>
+                            <li>开发基于串口通信的指令集系统与上位机终端,实现 FPGA 算子流水线的动态重配与多显示模式的热切换</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
 
     <footer>
-        Copyright © 2026 SuerEchoY · Powered by Gmeek
+        <p>Resume © 2026</p>
     </footer>
+
+    <script>
+        // 导航栏滚动样式切换
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // 滚动淡入动画 (Intersection Observer)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // 打字机效果
+        const textArray = ["机器人工程师", "FPGA与底层硬件开发者", "具身智能研发者"];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeTarget = document.getElementById("typewriter-text");
+
+        function type() {
+            const currentText = textArray[textIndex];
+            
+            if (isDeleting) {
+                typeTarget.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeTarget.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = 100;
+            if (isDeleting) typeSpeed /= 2;
+
+            if (!isDeleting && charIndex === currentText.length) {
+                typeSpeed = 2000; 
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % textArray.length;
+                typeSpeed = 500; 
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(type, 1000);
+        });
+    </script>
 </body>
 </html>
