@@ -282,11 +282,12 @@
                         
                         <div class="sub-title">核心贡献:</div>
                         <ul>
-                            <li><strong>SLAM算法优化:</strong>改进 Faster-LIO 建图逻辑,提出在 ICP 点面匹配前介入 XY 与 Z 轴预匹配策略,显著收敛 Z 轴累计漂移</li>
-                            <li><strong>异构规划器集成:</strong>统筹图搜索(A*、JPS)、随机采样(RRT 系列)及自研 RRCT 算法引入拐角检测与平滑优化,使复杂地形下的规划效率提升 35%</li>
-                            <li><strong>控制中枢开发:</strong>设计多线程并发控制器,接管 12-DOF 电机状态机封装 4 类控制域(距离/角度/位置/导航)与 20+ 动作原语,维持高频里程计广播</li>
-                            <li><strong>环境感知流:</strong>搭建 PCL+OpenCV 处理管线,实现 3D 点云至 2D 栅格的降维投影,结合动态障碍物检测完成像素空间至 3D 物理坐标的双向精准映射</li>
-                            <li><strong>协议与交互部署:</strong>深度解耦 Unitree SDK,重构 JSON 序列化协议与 TF 树管理机制；独立开发基于 Flutter 的移动端终控 APP,利用 SSH 与 ros2bridge 闭环远程遥测链路</li>
+                            <li><strong>SLAM算法优化:</strong>负责基于Fasterlio slam建图算法的优化,在ICP点面匹配前完成XY方向和Z方向的预匹配,从而减小z轴漂移</li>
+                            <li><strong>全局导航模块:</strong>实现并集成多种路径规划算法,包括图搜索类(A*,Theta*,JPS等)和随机采样类(RRT系列算法)以及实验室自研RRCT算法通过拐角检测与路径优化,在复杂环境下规划速度提高35%</li>
+                            <li><strong>运动控制模块:</strong>开发多线程控制器,管理12-DOF四足机器人电机状态机,实现4种控制模式(距离/角度/位置/导航)和20+种动作原语,支持实时里程计发布</li>
+                            <li><strong>点云处理线程:</strong>基于PCL+OpenCV实现3D点云至2D栅格地图的转换,集成自适应障碍物检测与双向坐标映射(像素空间和3D世界坐标的映射)</li>
+                            <li><strong>硬件高度集成:</strong>深度集成Unitree SDK,实现JSON协议序列化,TF树管理,多线程安全控制等</li>
+                            <li><strong>前端APP开发:</strong>采用Flutter框架开发XRobot控制APP,基于SSH实现远程连接控制以及基于ros2bridge实现ROS2话题的订阅和发布,实现远程监控和控制</li>
                         </ul>
                         
                         <div class="highlight-metrics">
@@ -305,10 +306,10 @@
                         
                         <div class="sub-title">核心贡献:</div>
                         <ul>
-                            <li><strong>异地通信总线:</strong>主导底层无线链路开发,基于 ESP8266 固件编写实现高可靠性的指令透传与图传数据流推送</li>
-                            <li><strong>定制化 RVIZ 平台:</strong>基于 QT 框架开发地面站测控软件,集成航点指派、代价地图渲染、地图拓扑编辑及点云/机体模型实时可视化功能</li>
-                            <li><strong>多传感器时钟同步:</strong>主导硬件同步板与 GPS 传感器的时序调优,实现 IMU、视觉传感器与 GPS 数据的严格对齐；编写 NMEA 解析栈并接入 ROS 通信网段</li>
-                            <li><strong>自研规划算法落地:</strong>参与实验室自研“基于碰撞点采样算法”的核心逻辑开发与代码重构,完成边界生成与航线平滑</li>
+                            <li><strong>图像图传模块:</strong>设计esp8266的驱动代码编写,实现单片机利用ESP8266完成远程命令控制和图像图传等功能</li>
+                            <li><strong>上位机界面开发:</strong>基于QT实现简易RVIZ的功能,具有设置并发布或取消导航点发布,代价地图显示,地图编辑和保存,机器人模型显示,点云地图显示等功能</li>
+                            <li><strong>传感器数据同步:</strong>调试同步板和GPS传感器,完成IMU,相机和GPS数据的同步,并解析GPS的NMEA数据帧(GPGGA,GPRMC等)消息并通过ROS话题发布</li>
+                            <li><strong>路径规划算法开发:</strong>参与并设计实验室自主研发的基于碰撞点采样的路径规划算法,完成初始路径的生成和路径优化</li>
                         </ul>
 
                         <div class="highlight-metrics">
@@ -347,9 +348,9 @@
                     </div>
                     <div class="project-desc">
                         <ul>
-                            <li><strong>DT2300 数据采集处理项目:</strong>部署 AD7606 完成 8 通道并行数据采集；基于 HLS 技术栈实现特征值高速运算协处理器；重构 AXI4-DMA 与 AXI4-Lite 总线拓扑,打通 PL 与 PS 侧高吞吐数据交互,并主笔设计规范</li>
-                            <li><strong>存储控制器设计:</strong>基于安陆 SF1 系列 FPGA,独立设计带有硬件仲裁机制的三帧缓存 PSRAM 控制器,确保多通道并发读写时序的安全与高效</li>
-                            <li><strong>系统级维护:</strong>接手并优化 DW1900S 遗留项目代码基线,熟练使用 ISE 工具链进行时序收敛与程序固化</li>
+                            <li><strong>DT2300 数据采集处理项目:</strong> 参与DT2300项目中基于AD7606完成八通道的数据采集,并基于HLS实现特征值计算模块,进一步利用AXI4-DMA与AXI4-Lite总线,设计与实现PL与PS间数据交互,并编写设计报告</li>
+                            <li><strong>存储控制器设计:</strong>基于安陆SF1系列设计具有仲裁机制的三帧缓存架构的PSRAM控制器,实现多通道的读写操作</li>
+                            <li><strong>系统级维护:</strong>熟悉DW1900S项目代码框架,并使用ISE工具完成程序固化</li>
                         </ul>
                     </div>
                 </div>
@@ -361,9 +362,9 @@
                     </div>
                     <div class="project-desc">
                         <ul>
-                            <li>深度定制 PCIe EP 控制器(基于 XDMA),独立完成 Type0 配置空间初始化与 BAR 地址映射,建立 NVMe 设备的底层物理链接</li>
-                            <li>从零构建轻量级 NVMe 协议栈,封装 Admin 与 I/O 队列的读写调度机制,实现复杂命令包的精确封包与解包逻辑</li>
-                            <li>设计基于公平仲裁策略的多通道 AXI4-DMA 调度器,管理流媒体数据包的双向路由,实现海量视频流的无掉帧存储与高实时回放</li>
+                            <li>通过XDMA完成PCIe EP控制器的设计,实现Type0配置空间和BAR映射,完成NVMe的初始化操作</li>
+                            <li>开发简易的NVMe协议栈,包括Admin/IO队列读写控制和框架设计以及NVMe命令包的封包解包</li>
+                            <li>设计具有仲裁机制的AXI4-DMA控制器,实现不同读写数据包的发送和接收,完成视频的存储和回放</li>
                         </ul>
                     </div>
                 </div>
@@ -375,9 +376,9 @@
                     </div>
                     <div class="project-desc">
                         <ul>
-                            <li>主导图像流水线硬件加速,完成基于 SIFT 的特征提取与图像拼接算子设计(涵盖 Harris 角点检测、CORDIC 极坐标解算、LFSR 随机数注入、高斯消元阵列、单应性变换及加权融合)</li>
-                            <li>架构设计支持任意 burst 长度与多通道并行的 AXI4-DMA 内存管理器,突破数据搬运瓶颈,实现跨模块数据的分区隔离与高效转运</li>
-                            <li>搭建基于 XDMA 的全双工高速物理总线,打通异构计算平台(FPGA-PC)数据链路,并编写桌面端程序完成描述子匹配的可视化验证</li>
+                            <li>负责SIFT特征描述子的生成和图像拼接的实现,包括Harries角质检测,cordic运算,LFSR伪随机数生成,高斯消元法求解,图像单应性矩阵变换,图像加权融合等</li>
+                            <li>设计支持任意长度的多通道AXI4-DMA控制器,实现不同模块间数据的分区存储和转运调用</li>
+                            <li>负责XDMA高速通路搭建,完成板卡和PC机的数据交互并设计上位机完成SIFT特征描述子匹配</li>
                         </ul>
                     </div>
                 </div>
@@ -389,9 +390,9 @@
                     </div>
                     <div class="project-desc">
                         <ul>
-                            <li>攻克 MIPI CSI-2 物理层协议,完成 OV5640 传感器驱动开发与时序校准硬化多项图像处理核心算法(仿射变换、空域滤波、边缘检测与动态融合)</li>
+                            <li>负责MIPI CSI-2与OV5640传感器接口的驱动开发与通路调试,并实现常见图像处理算法,包括任意角度旋转,滤波,边缘检测,裁剪,融合等</li>
                             <li>创新性设计分奇偶 Bank 寻址的三帧缓存 AXI-DMA 控制架构,彻底消除视频流拼接过程中的画面撕裂与显存读写冲突</li>
-                            <li>开发基于串口通信的指令集系统与上位机终端,实现 FPGA 算子流水线的动态重配与多显示模式的热切换</li>
+                            <li>开发串口上位机控制程序,通过指令控制FPGA端实时切换不同的图像处理模式与显示内容</li>
                         </ul>
                     </div>
                 </div>
